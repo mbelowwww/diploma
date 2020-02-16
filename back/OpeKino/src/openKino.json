@@ -1,0 +1,685 @@
+{
+    "version": 6,
+    "entities": [
+        {
+            "entity": {
+                "type": "Project",
+                "id": "29ccc8ac-6c1b-46ab-b264-0f5d30baa0de",
+                "name": "Kino"
+            },
+            "children": [
+                {
+                    "entity": {
+                        "type": "Service",
+                        "description": "",
+                        "id": "c1b37970-cfd5-4c1b-bf3a-5c3b6b856c8d",
+                        "name": "Залы"
+                    },
+                    "children": [
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                                    "name": "GET"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": [
+                                            {
+                                                "enabled": true,
+                                                "name": "idHall",
+                                                "value": "102"
+                                            }
+                                        ]
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/hall"
+                                },
+                                "id": "fffcbac3-940d-40a7-8531-8e1b5c70b312",
+                                "name": "Получить зал",
+                                "headers": []
+                            }
+                        },
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                                    "name": "GET"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": []
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/hall/all"
+                                },
+                                "id": "e6f025a1-652e-4330-96ae-6d1c873e7cc1",
+                                "name": "Получить залы с количеством мест",
+                                "headers": []
+                            }
+                        },
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "requestBody": true,
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                                    "name": "POST"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text",
+                                    "textBody": "{\n  \"width\":\"10\",\n  \"height\":\"10\",\n  \"number\":\"1\",\n  \"price\":\"\",\n  \"places\":[\n    {\"y\":\"1\",\"x\":\"1\"},\n    {\"y\":\"1\",\"x\":\"2\"},\n    {\"y\":\"1\",\"x\":\"3\"},\n    {\"y\":\"1\",\"x\":\"4\"}\n  ]\n}"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": []
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/hall"
+                                },
+                                "id": "875a8e29-f707-4809-abb2-f9a4a6d0618b",
+                                "name": "Создать зал",
+                                "headers": [
+                                    {
+                                        "enabled": true,
+                                        "name": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                                    "name": "DELETE"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": [
+                                            {
+                                                "enabled": true,
+                                                "name": "idHall",
+                                                "value": "70"
+                                            }
+                                        ]
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/hall"
+                                },
+                                "id": "d285c4e7-56c2-4bcb-a080-c85ef41e25cf",
+                                "name": "Удалить зал (только если в нём не было ни одного сеанса)",
+                                "headers": []
+                            }
+                        }
+                    ]
+                },
+                {
+                    "entity": {
+                        "type": "Service",
+                        "description": "",
+                        "id": "bdf0f381-0764-484c-b082-6fb85ea2ec51",
+                        "name": "Пользователи"
+                    },
+                    "children": [
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "requestBody": true,
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                                    "name": "POST"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text",
+                                    "textBody": "{\n  \"mail\":\"@mbelowww\",\n  \"password\":\"123\"\n}"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": []
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/auth"
+                                },
+                                "id": "4b369490-c2f6-4f0e-93fc-a6f66b16c015",
+                                "name": "Авторизация",
+                                "headers": [
+                                    {
+                                        "enabled": true,
+                                        "name": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "requestBody": true,
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                                    "name": "PUT"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text",
+                                    "textBody": "{\n  \"id\": \"2\"\n}"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": [
+                                            {
+                                                "enabled": true,
+                                                "name": "active",
+                                                "value": "false"
+                                            }
+                                        ]
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/kinouser/active"
+                                },
+                                "id": "762ba342-6727-4315-a0bf-1400b9eadcbe",
+                                "name": "Блокировка(active = false)/Разблокировка (active = true) пользователей //  todo любые поля из регистрации!",
+                                "headers": [
+                                    {
+                                        "enabled": true,
+                                        "name": "Content-Type",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "enabled": true,
+                                        "name": "Authorization",
+                                        "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJAbWJlbG93IiwiYXV0aG9yaXRpZXMiOlt7ImF1dGhvcml0eSI6IlVzZXIifV0sImlhdCI6MTU4MTM5OTY4OSwiZXhwIjoxNTgxNDg2MDg5fQ.aQaajgFBR365HRcsCP7iagXgPAP6Id6_Wy6wMCxmQ-6N0VKGrF76I-lKjDYTYBPzSP51OF_XXRRx8OWWWANzEg"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                                    "name": "GET"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": [
+                                            {
+                                                "enabled": true,
+                                                "name": "fname",
+                                                "value": "Белов"
+                                            },
+                                            {
+                                                "enabled": true,
+                                                "name": "name",
+                                                "value": ""
+                                            },
+                                            {
+                                                "enabled": true,
+                                                "name": "lname",
+                                                "value": ""
+                                            },
+                                            {
+                                                "enabled": true,
+                                                "name": "mail",
+                                                "value": ""
+                                            }
+                                        ]
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/kinouser/find"
+                                },
+                                "id": "651542cf-5eea-4589-b213-00f24a497b21",
+                                "name": "Гибкий поиск по ФИО и почте",
+                                "headers": []
+                            }
+                        },
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "requestBody": true,
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                                    "name": "PUT"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text",
+                                    "textBody": "{\n  \"id\": \"34\",\n  \"fName\": \"Пупкин\",\n  \"name\": \"Залупкин\",\t\t\n  \"lName\":\"Залупочив\"\n\n}"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": []
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/kinouser"
+                                },
+                                "id": "85a9bc65-1d2d-4f9e-8d93-e39a3ca93f74",
+                                "name": "Изменить пользователя   //  todo любые поля из регистрации!",
+                                "headers": [
+                                    {
+                                        "enabled": true,
+                                        "name": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                                    "name": "GET"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": []
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/kinouser/all"
+                                },
+                                "id": "ad96b227-df41-4bc3-a394-628520582fff",
+                                "name": "Получить всех пользователей",
+                                "headers": []
+                            }
+                        },
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "requestBody": true,
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                                    "name": "POST"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text",
+                                    "textBody": "{\n  \"fName\": \"Белов\",\n  \"name\": \"Михаил\",\n  \"lName\":\"Александрович\",\n  \"password\" : \"123\",\n  \"age\": \"21\",\n  \"phone\": \"123\",\n  \"mail\" : \"@mbelowww\"\n}"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": []
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/kinouser"
+                                },
+                                "id": "ff9988d9-19e8-4d40-8313-792c60db34c7",
+                                "name": "Регистрация",
+                                "headers": [
+                                    {
+                                        "enabled": true,
+                                        "name": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "entity": {
+                        "type": "Service",
+                        "id": "41b450e3-b1da-4c21-8790-effa0d1dfe80",
+                        "name": "Сеансы"
+                    },
+                    "children": [
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                                    "name": "GET"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text"
+                                },
+                                "uri": {
+                                    "scheme": {
+                                        "secure": true,
+                                        "name": "https",
+                                        "version": "V11"
+                                    }
+                                },
+                                "id": "cc1c0aed-1f09-437f-bb8b-ea18a2ae1db4",
+                                "name": "Request 2",
+                                "headers": []
+                            }
+                        },
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "requestBody": true,
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                                    "name": "POST"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text",
+                                    "textBody": "{\n  \"start\":\"01.02.2020 12:30:00\",\n  \"end\":\"01.02.2020 13:10:00\",\n  \"idFilm\":\"34\",\n  \"idHall\":\"102\",\n  \"IdTypeSession\":null\n}"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": []
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/session"
+                                },
+                                "id": "92bb7fb0-c1bd-447e-a40e-21593cc8e010",
+                                "name": "Добавить",
+                                "headers": [
+                                    {
+                                        "enabled": true,
+                                        "name": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "entity": {
+                        "type": "Service",
+                        "id": "f60b45b3-dcbb-4879-8107-b03e4c138212",
+                        "name": "Фильмы"
+                    },
+                    "children": [
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                                    "name": "GET"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": [
+                                            {
+                                                "enabled": true,
+                                                "name": "name",
+                                                "value": "h"
+                                            },
+                                            {
+                                                "name": "limitAge",
+                                                "value": ""
+                                            },
+                                            {
+                                                "name": "rating",
+                                                "value": ""
+                                            },
+                                            {
+                                                "name": "genre",
+                                                "value": ""
+                                            }
+                                        ]
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/film"
+                                },
+                                "id": "1bceb2e2-d741-40b2-a7e5-94992f6907a0",
+                                "name": "Гибкий поиск",
+                                "headers": []
+                            }
+                        },
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "requestBody": true,
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                                    "name": "PUT"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text",
+                                    "textBody": "{\n  \"id\":\"34\",\n  \"name\": \"Hatiko\",\n  \"description\":\"Описание\",\n  \"length\": \"7020\",\n  \"rating\": \"5.3\",\n  \"genre\": {\"name\" : \"Drama\"},\n  \"typeFilm\" : {\"name\" : \"3d\"},\n  \"limitAge\" : {\"age\" : \"18\"}\n}"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": []
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/film"
+                                },
+                                "id": "7b13c4ee-4f69-4386-8cde-039c93304bf6",
+                                "name": "Изменить",
+                                "headers": [
+                                    {
+                                        "enabled": true,
+                                        "name": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "requestBody": true,
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                                    "name": "POST"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text",
+                                    "textBody": "{\n  \"name\": \"Hatiko\",\n  \"description\":\"Описание\",\n  \"length\": \"7020\",\n  \"rating\": \"5.3\",\n  \"genre\": {\"name\" : \"Drama\"},\n  \"typeFilm\" : {\"name\" : \"3d\"},\n  \"limitAge\" : {\"age\" : \"18\"}\n}"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": []
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/film"
+                                },
+                                "id": "693f7398-ca1e-419a-a40d-c436344e8528",
+                                "name": "Сохранить",
+                                "headers": [
+                                    {
+                                        "enabled": true,
+                                        "name": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "entity": {
+                                "type": "Request",
+                                "method": {
+                                    "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                                    "name": "DELETE"
+                                },
+                                "body": {
+                                    "formBody": {
+                                        "overrideContentType": true,
+                                        "encoding": "application/x-www-form-urlencoded",
+                                        "items": []
+                                    },
+                                    "bodyType": "Text"
+                                },
+                                "uri": {
+                                    "query": {
+                                        "delimiter": "&",
+                                        "items": []
+                                    },
+                                    "scheme": {
+                                        "name": "http",
+                                        "version": "V11"
+                                    },
+                                    "host": "localhost:8083",
+                                    "path": "/film/66"
+                                },
+                                "id": "db0df555-af41-4b8c-80f9-b4630354d545",
+                                "name": "Удалить (вмести с картинками, если они есть)",
+                                "headers": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
