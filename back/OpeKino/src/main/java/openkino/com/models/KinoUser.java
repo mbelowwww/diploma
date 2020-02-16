@@ -64,6 +64,17 @@ public class KinoUser implements UserDetails {
     private List<Card> cards;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "kinoUser")
+    private List<UserBan> userBan;
+
+    public List<UserBan> getUserBan() {
+        return userBan;
+    }
+
+    public void setUserBan(List<UserBan> userBan) {
+        this.userBan = userBan;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "kinoUser")
     private List<Comment> comments;
 
     public KinoUser() {
