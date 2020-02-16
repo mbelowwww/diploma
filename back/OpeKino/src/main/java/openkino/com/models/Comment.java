@@ -1,0 +1,85 @@
+package openkino.com.models;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
+import openkino.com.view.Views;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table
+public class Comment {
+
+    @JsonView(Views.Public.class)
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @JsonView(Views.Public.class)
+    @Column
+    private String comment;
+
+    @JsonView(Views.Public.class)
+    @Column
+    private Rating rating;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonView(Views.Public.class)
+    @Column
+    private LocalDateTime date;
+
+    @JsonView(Views.Public.class)
+    @ManyToOne
+    @JoinColumn
+    private KinoUser kinoUser;
+
+    @JsonView(Views.Public.class)
+    @ManyToOne
+    @JoinColumn
+    private Film film;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public KinoUser getKinoUser() {
+        return kinoUser;
+    }
+
+    public void setKinoUser(KinoUser kinoUser) {
+        this.kinoUser = kinoUser;
+    }
+
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
+    }
+
+    public enum Rating {
+        one, two, three, four, five, six, seven, eight, nine, ten
+    }
+}
