@@ -41,12 +41,6 @@ public class KinoUserController {
     }
 
     @JsonView(Views.Public.class)
-    @PutMapping("/active")
-    public Long blockKinoUser(@RequestBody KinoUser kinoUser, @RequestParam("active") Boolean active, @AuthenticationPrincipal KinoUser user) {
-        return kinoUserService.active(kinoUser, active);
-    }
-
-    @JsonView(Views.Public.class)
     @DeleteMapping("/delete/{id}")
     public void deleteKinoUser(@PathVariable Long id) {
         kinoUserService.deleteById(id);

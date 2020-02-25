@@ -16,4 +16,8 @@ public class ResponseException extends ResponseStatusException {
         super(status, message);
         this.message = message;
     }
+
+    public static void nullHandler(Object o, String message) {
+        if (o == null) throw new ResponseException(HttpStatus.BAD_REQUEST,message);
+    }
 }

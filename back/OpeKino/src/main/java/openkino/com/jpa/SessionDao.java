@@ -18,4 +18,10 @@ public interface SessionDao extends JpaRepository<Session, Long> {
     List<Session> getAllSession(@Param("id") Long id);
 
     Session findSessionByHall_Id(Long id_hall);
+
+    @Query("select s from Session s where s.hall.id = ?1 and (?2 between s.start and s.end) and (?3 between  s.start and s.end)")
+    List<Session> findAllByHall_IdAnAndStart(Long hallId,LocalDateTime start,LocalDateTime end);
+
+    @Query("select s from Session s where s.start between ?1 and  ?2")
+    List<Session> findAllByDataTime(LocalDateTime startTime, LocalDateTime endTime);
 }

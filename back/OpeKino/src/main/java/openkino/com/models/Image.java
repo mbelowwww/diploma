@@ -7,32 +7,23 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Image {
-
-    @JsonView(Views.Public.class)
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private Long id;
+public class Image extends AuditEntity{
 
     @Column
     @JsonView(Views.Public.class)
     private String type;
 
+    @Column
+    @JsonView(Views.Public.class)
+    private Boolean flag;
+
     @JsonView(Views.Public.class)
     @Column(columnDefinition = "BINARY(5000000)")
     private byte[] image_array;
 
-    @OneToOne
+    @ManyToOne
     private Film film;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public byte[] getImage_array() {
         return image_array;
@@ -56,5 +47,13 @@ public class Image {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Boolean getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Boolean flag) {
+        this.flag = flag;
     }
 }

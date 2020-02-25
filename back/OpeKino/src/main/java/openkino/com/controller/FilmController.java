@@ -1,7 +1,7 @@
 package openkino.com.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import openkino.com.form.ImageForm;
+import openkino.com.form.ImageSaveForm;
 import openkino.com.models.Film;
 import openkino.com.models.Genre;
 import openkino.com.models.LimitAge;
@@ -80,12 +80,12 @@ public class FilmController {
     }
 
     @JsonView(Views.Public.class)
-    @PostMapping("/image/upload")
-    public Long loadImage(@RequestBody ImageForm imageMask) throws IOException {
+    @PostMapping("/image")
+    public Long loadImage(@RequestBody ImageSaveForm imageMask){
         return filmService.loadImage(imageMask);
     }
 
-    @DeleteMapping("/image/delete/{id}")
+    @DeleteMapping("/image/{id}")
     public void deleteImageById(@PathVariable Long id) {
         filmService.deleteImage(id);
     }

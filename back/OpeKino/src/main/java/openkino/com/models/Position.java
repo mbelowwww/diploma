@@ -1,16 +1,14 @@
 package openkino.com.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "POSITION")
-public class Position {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID")
-    private Long id;
+public class Position extends AuditEntity{
 
     @Column(name = "NAME")
     private String name;
@@ -18,30 +16,4 @@ public class Position {
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "position")
     private List<KinoUser> kinoUsers;
-
-    public Position(){}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setKinoUsers(List<KinoUser> kinoUsers) {
-        this.kinoUsers = kinoUsers;
-    }
-
-    public List<KinoUser> getKinoUsers() {
-        return kinoUsers;
-    }
 }

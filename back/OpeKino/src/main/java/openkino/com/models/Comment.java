@@ -9,12 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table
-public class Comment {
-
-    @JsonView(Views.Public.class)
-    @Id
-    @GeneratedValue
-    private Long id;
+public class Comment extends AuditEntity{
 
     @JsonView(Views.Public.class)
     @Column
@@ -38,14 +33,6 @@ public class Comment {
     @ManyToOne
     @JoinColumn
     private Film film;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getComment() {
         return comment;

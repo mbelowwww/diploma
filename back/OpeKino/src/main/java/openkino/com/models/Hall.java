@@ -13,10 +13,7 @@ import java.util.List;
 
 @Entity
 @Table
-public class Hall {
-    @Id
-    @GeneratedValue
-    private Long id;
+public class Hall extends AuditEntity {
 
     @JsonView(Views.Public.class)
     @Column
@@ -42,14 +39,6 @@ public class Hall {
     private List<Session> sessions;
 
     public Hall() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Integer getNumber() {

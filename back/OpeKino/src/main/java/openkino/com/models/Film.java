@@ -11,12 +11,7 @@ import java.util.List;
 
 @Entity
 @Table
-public class Film {
-
-    @JsonView({Views.Public.class, Views.Internal.class})
-    @Id
-    @GeneratedValue
-    private Long id;
+public class Film extends AuditEntity{
 
     @JsonView({Views.Public.class, Views.Internal.class})
     @Column
@@ -47,9 +42,8 @@ public class Film {
     private Genre genre;
 
     @JsonView({Views.Public.class, Views.Internal.class})
-    @OneToOne
-    @JoinColumn
-    private Image image;
+    @OneToMany(mappedBy = "film")
+    private List<Image> image;
 
     @OneToMany(mappedBy = "film")
     private List<Session> sessions;
@@ -75,14 +69,6 @@ public class Film {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -126,11 +112,11 @@ public class Film {
         this.sessions = sessions;
     }
 
-    public Image getImage() {
+    public List<Image> getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(List<Image> image) {
         this.image = image;
     }
 

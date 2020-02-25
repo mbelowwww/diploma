@@ -10,13 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "GENRE")
-public class Genre {
-
-    @JsonView(Views.Public.class)
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
-    private Long id;
+public class Genre extends AuditEntity {
 
     @JsonView(Views.Public.class)
     @Column(name = "Name")
@@ -27,14 +21,6 @@ public class Genre {
     private List<Film> films;
 
     public Genre() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {

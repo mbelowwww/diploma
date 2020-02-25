@@ -1,8 +1,6 @@
 package openkino.com.models;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.*;
 import openkino.com.view.Views;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,13 +14,7 @@ import java.util.List;
 @Entity
 @Table
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class KinoUser implements UserDetails {
-
-    @JsonView(Views.Public.class)
-    @Id
-    @GeneratedValue
-    @Column
-    private Long id;
+public class KinoUser extends AuditEntity implements UserDetails{
 
     @JsonView(Views.Public.class)
     @Column
@@ -66,6 +58,9 @@ public class KinoUser implements UserDetails {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "kinoUser")
     private List<UserBan> userBan;
 
+    @JsonIdentityInfo(
+            generator = ObjectIdGenerators.PropertyGenerator.class,
+            property = "id")
     public List<UserBan> getUserBan() {
         return userBan;
     }
@@ -78,14 +73,6 @@ public class KinoUser implements UserDetails {
     private List<Comment> comments;
 
     public KinoUser() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getfName() {

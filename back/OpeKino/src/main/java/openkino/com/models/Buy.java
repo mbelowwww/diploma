@@ -14,14 +14,10 @@ import java.util.List;
 @Table
 @Data
 @NoArgsConstructor
-public class Buy {
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class Buy extends AuditEntity{
 
     @Column
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", locale = "ru_RU")
+    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private LocalDateTime localDateTime = LocalDateTime.now();
 
     @Column
@@ -41,11 +37,7 @@ public class Buy {
     private Discount discount;
 
     @JsonManagedReference
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "buy")
-    private List<Reservation> reservations;
-
-    @JsonIgnore
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
-    }
+    @OneToOne
+    @JoinColumn
+    private Reservation reservation;
 }

@@ -9,48 +9,41 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
-@NoArgsConstructor
 @Entity
 @Table
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
-public class Reservation {
-
-    @Id
-    @GeneratedValue
-    @Column
-    private Long id;
+public class Reservation extends AuditEntity {
 
     @Column
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss")
+    private ReservationStatusEnum status;
+
+    @Column
+    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private LocalDateTime start;
 
     @Column
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss")
+    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     private LocalDateTime end;
 
     @Column
-    private ReservationStatus status;
+    private String personName;
 
     @Column
     private BigDecimal price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne
     @JoinColumn
     private KinoUser kinoUser;
 
     @ManyToOne
     @JoinColumn
-    @JsonBackReference
-    private Place place;
+    private Session session;
 
-    @ManyToOne
-    @JoinColumn
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation")
+    private List<Place> places;
+
+    @OneToOne
     private Buy buy;
-
-    public enum ReservationStatus{
-        booked,notBooked
-    }
-
 }

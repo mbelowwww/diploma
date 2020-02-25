@@ -6,10 +6,12 @@ import openkino.com.form.HallForm;
 import openkino.com.form.PlaceForm;
 import openkino.com.jpa.HallDao;
 import openkino.com.jpa.PlaceDao;
+import openkino.com.models.AuditEntity;
 import openkino.com.models.Hall;
 import openkino.com.models.Place;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +23,6 @@ public class HallServiceImpl implements HallService {
 
     @Override
     public Long save(HallForm hallForm) {
-
         Hall hall = new HallForm().toHall(hallForm);
         hallDao.save(hall);
         List<Place> places = hallForm.getPlaces().stream()
@@ -29,6 +30,7 @@ public class HallServiceImpl implements HallService {
                 .collect(Collectors.toList());
         places.forEach(place -> savePlace(place));
         hall.setPlaces(places);
+        Helper.auditOnCreate(hall);
         return hallDao.save(hall).getId();
     }
 
@@ -52,6 +54,7 @@ public class HallServiceImpl implements HallService {
     }
 
     private void savePlace(Place place) {
+        Helper.auditOnCreate(place);
         placeDao.save(place);
     }
 }

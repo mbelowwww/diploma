@@ -1,6 +1,6 @@
 package openkino.com.service;
 
-import openkino.com.form.ImageForm;
+import openkino.com.form.ImageSaveForm;
 import openkino.com.models.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface FilmService {
 
-    Long saveFilm(Film film);//
+    Long saveFilm(Film film);
 
-    void deleteFilmById(Long id);//
+    void deleteFilmById(Long id);
 
     Long updateFilmById(Film film);
 
-    Film findFilmById(Long id);//
+    Film findFilmById(Long id);
 
     List<Film> findFilmsByVars(String name,
                                String genre,
@@ -35,7 +35,7 @@ public interface FilmService {
 
     Long updateRating(Long idFilm, Float rating);
 
-    Long loadImage(ImageForm imageMask) throws IOException;
+    Long loadImage(ImageSaveForm imageMask);
 
     Long loadImageUpdate(MultipartFile file, Long id) throws IOException;
 

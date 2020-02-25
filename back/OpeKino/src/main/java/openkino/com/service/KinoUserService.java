@@ -18,8 +18,6 @@ public interface KinoUserService extends UserDetailsService {
 
     List<KinoUser> findKinoUserAll();
 
-    Long active(KinoUser kinoUser, Boolean active);
-
     KinoUser findKinoUserByMail(String mail);
 
     List<KinoUser> findByName(String fname, String name, String lname, String mail);

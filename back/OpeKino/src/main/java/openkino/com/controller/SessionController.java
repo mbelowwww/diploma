@@ -1,12 +1,20 @@
 package openkino.com.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
+import openkino.com.VO.SessionVO;
 import openkino.com.form.SessionForm;
+import openkino.com.form.TypeSessionForm;
+import openkino.com.models.Session;
+import openkino.com.models.TypeSession;
 import openkino.com.service.SessionService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import openkino.com.view.Views;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/session")
@@ -14,8 +22,35 @@ import org.springframework.web.bind.annotation.RestController;
 public class SessionController {
     private SessionService sessionService;
 
+    @DeleteMapping("/{id}")
+    public void deleteSession(@PathVariable Long id){
+        sessionService.deleteSessionById(id);
+    }
+
+    @JsonView(Views.Public.class)
+    @PutMapping("/time")
+    public List<SessionVO> findAllByTime(@RequestBody SessionForm form){
+        return sessionService.findAllByTime(form.getStart(),form.getEnd());
+    }
+
+    @GetMapping("/type/{id}")
+    public TypeSession findTypeSessionById(@PathVariable("id") Long id) {
+        return sessionService.findTypeSessionById(id);
+    }
+
+    @PostMapping("/type")
+    public Long saveTypeSession(@RequestBody TypeSessionForm form) {
+        return sessionService.saveTypeSession(form);
+    }
+
+    @JsonView(Views.Public.class)
+    @GetMapping("/{id}")
+    public SessionVO findById(@PathVariable("id") Long id) {
+        return sessionService.findSessionById(id);
+    }
+
     @PostMapping("")
-    public Long saveSession(@RequestBody SessionForm sessionForm){
+    public Long saveSession(@RequestBody SessionForm sessionForm) {
         return sessionService.saveSession(sessionForm);
     }
 }

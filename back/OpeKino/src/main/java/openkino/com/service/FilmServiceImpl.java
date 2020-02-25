@@ -2,11 +2,11 @@ package openkino.com.service;
 
 
 import lombok.AllArgsConstructor;
+import openkino.com.form.ImageSaveForm;
 import openkino.com.jpa.FilmDao;
 import openkino.com.jpa.GenreDao;
 import openkino.com.jpa.ImageDao;
 import openkino.com.jpa.LimitAgeDao;
-import openkino.com.form.ImageForm;
 import openkino.com.models.Film;
 import openkino.com.models.Genre;
 import openkino.com.models.Image;
@@ -16,7 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -30,16 +32,15 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public Long saveFilm(Film film) {
         updateGRLT(film);
+        Helper.auditOnCreate(film);
         return filmDao.save(film).getId();
     }
 
     @Override
     public void deleteFilmById(Long id) {
-        Film film = filmDao.findById(id)
-                .orElseThrow(NullPointerException::new);
-        if (film.getImage() != null)
-            deleteImage(film.getImage().getId());
-        filmDao.deleteById(id);
+        List<Image> images = imageDao.findAllByFilm_Id(id);
+        imageDao.deleteAll(images);
+        filmDao.delete(filmDao.findById(id).orElseThrow(NullPointerException::new));
     }
 
     @Override
@@ -48,6 +49,7 @@ public class FilmServiceImpl implements FilmService {
         Film film1 = filmDao.findById(film.getId()).get();
         film1.setName(film.getName());
         film1.setLength(film.getLength());
+        Helper.auditOnUpdate(film);
         return filmDao.save(film1).getId();
     }
 
@@ -61,6 +63,7 @@ public class FilmServiceImpl implements FilmService {
         Genre genre1 = genreDao.findById(genre.getId()).get();
         genre1.setName(genre.getName());
         genre1.setFilms(genre.getFilms());
+        Helper.auditOnUpdate(genre1);
         return genreDao.save(genre1).getId();
     }
 
@@ -75,6 +78,7 @@ public class FilmServiceImpl implements FilmService {
         LimitAge limitAge1 = limitAgeDao.findById(limitAge.getId()).get();
         limitAge1.setAge(limitAge.getAge());
         limitAge1.setFilms(limitAge.getFilms());
+        Helper.auditOnCreate(limitAge1);
         return limitAgeDao.save(limitAge1).getId();
     }
 
@@ -121,13 +125,16 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public Long loadImage(ImageForm imageMask) throws IOException {
-        Film film = filmDao.findById(imageMask.getId()).get();
-        Image image = imageMask.toImage(imageMask);
-        image.setFilm(film);
-        film.setImage(image);
-        filmDao.save(film);
-        return imageDao.save(image).getId();
+    public Long loadImage(ImageSaveForm imageMask){
+        Film film = filmDao.findById(imageMask.getFilmId()).orElseThrow(NullPointerException::new);
+        List<Image> images = imageMask.getImages().stream().map(imageForm ->{
+            Image image = imageForm.toImage();
+            image.setFilm(film);
+            Helper.auditOnUpdate(image);
+            return image;
+        }).collect(Collectors.toList());
+        imageDao.saveAll(images);
+        return film.getId();
     }
 
     @Override
@@ -142,6 +149,7 @@ public class FilmServiceImpl implements FilmService {
         byte[] array = file.getBytes();
         image.setImage_array(array);
         image.setType(file.getContentType());
+        Helper.auditOnUpdate(image);
         return imageDao.save(image).getId();
     }
 
@@ -152,12 +160,6 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public void deleteImage(Long id) {
-        Image image = imageDao.findById(id).get();
-        Long id_kino = image.getFilm().getId();
-        Film film = filmDao.findById(id_kino).get();
-        film.setImage(null);
-        filmDao.save(film);
-        imageDao.deleteById(id);
     }
 
     @Override

@@ -1,47 +1,42 @@
-package openkino.com.models;
-
+package openkino.com.VO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
+import openkino.com.models.Film;
+import openkino.com.models.Hall;
+import openkino.com.models.Session;
+import openkino.com.models.TypeSession;
 import openkino.com.view.Views;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
-@Entity
-@Table
-public class Session extends AuditEntity {
+public class SessionVO extends ModelVO{
 
     @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     @JsonView(Views.Public.class)
-    @Column
     private LocalDateTime start;
 
     @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     @JsonView(Views.Public.class)
-    @Column
     private LocalDateTime end;
 
     @JsonView(Views.Public.class)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne
-    @JoinColumn
     private Film film;
 
     @JsonView(Views.Public.class)
-    @ManyToOne
-    @JoinColumn
     private Hall hall;
 
     @JsonView(Views.Public.class)
-    @ManyToOne
-    @JoinColumn
     private TypeSession typeSession;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "session")
-    private List<Reservation> reservations;
+    public SessionVO(Session session){
+        super(session.getId());
+        this.start = session.getStart();
+        this.end = session.getEnd();
+        this.film = session.getFilm();
+        this.hall = session.getHall();
+        this.typeSession = session.getTypeSession();
+    }
 }

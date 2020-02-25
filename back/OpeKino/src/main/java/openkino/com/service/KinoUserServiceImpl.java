@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,6 +32,8 @@ public class KinoUserServiceImpl implements KinoUserService {
         kinoUser.setPosition(position);
         kinoUser.setAction(true);
         kinoUser.setPassword(new BCryptPasswordEncoder().encode(kinoUser.getPassword()));
+        kinoUser.setCreatedWhen(LocalDateTime.now());
+        kinoUser.setUpdatedWhen(LocalDateTime.now());
         return kinoUserDao.save(kinoUser).getId();
     }
 
@@ -61,14 +64,6 @@ public class KinoUserServiceImpl implements KinoUserService {
     @Override
     public List<KinoUser> findKinoUserAll() {
         return kinoUserDao.findAll();
-    }
-
-    @Override
-    public Long active(KinoUser kinoUser, Boolean active) {
-        KinoUser kinoUser1 = kinoUserDao.findById(kinoUser.getId())
-                .orElseThrow(NullPointerException::new);
-        kinoUser1.setAction(active);
-        return kinoUserDao.save(kinoUser1).getId();
     }
 
     @Override

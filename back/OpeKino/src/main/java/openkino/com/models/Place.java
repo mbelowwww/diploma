@@ -1,5 +1,6 @@
 package openkino.com.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,13 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table
-public class Place {
-
-    @JsonView(Views.Public.class)
-    @Id
-    @GeneratedValue
-    @Column
-    private Long id;
+public class Place extends AuditEntity {
 
     @JsonView(Views.Public.class)
     @Column
@@ -32,11 +27,18 @@ public class Place {
     @Column
     private Integer x;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "place")
-    private List<Reservation> reservations;
+    @ManyToOne
+    @JoinColumn
+    private Reservation reservation;
 
     @ManyToOne
     @JoinColumn
     private Hall hall;
+
+
+    @JsonIgnore
+    public void setHall(Hall hall) {
+        this.hall = hall;
+    }
 
 }

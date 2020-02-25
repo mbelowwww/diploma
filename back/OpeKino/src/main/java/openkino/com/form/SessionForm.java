@@ -6,6 +6,7 @@ import openkino.com.models.Film;
 import openkino.com.models.Hall;
 import openkino.com.models.Session;
 import openkino.com.models.TypeSession;
+import openkino.com.service.Helper;
 
 import java.time.LocalDateTime;
 
@@ -20,15 +21,16 @@ public class SessionForm {
 
     private Long idFilm;
     private Long idHall;
-    private Long IdTypeSession;
+    private Long idTypeSession;
 
     public static Session toSession(SessionForm form, TypeSession typeSession, Hall hall, Film film) {
         Session session = new Session();
         session.setStart(form.getStart());
-        session.setEnd(form.getEnd());
+        session.setEnd(session.getStart().plusSeconds(film.getLength()));
         session.setTypeSession(typeSession);
         session.setHall(hall);
         session.setFilm(film);
+        Helper.auditOnCreate(session);
         return session;
     }
 }

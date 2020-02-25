@@ -1,31 +1,46 @@
 package openkino.com.form;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import openkino.com.models.Buy;
-import openkino.com.models.KinoUser;
-import openkino.com.models.Place;
-import openkino.com.models.Reservation;
+import openkino.com.exceptions.ResponseException;
+import openkino.com.jpa.HallDao;
+import openkino.com.jpa.PlaceDao;
+import openkino.com.jpa.SessionDao;
+import openkino.com.models.*;
+import openkino.com.service.Helper;
+import org.springframework.http.HttpStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class ReservationForm {
     private Long id;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss")
-    private LocalDateTime start;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd@HH:mm:ss")
-    private LocalDateTime end;
-    private Reservation.ReservationStatus status;
-    private BigDecimal price;
-    private KinoUser kinoUser;
-    private Place place;
-    private Buy buy;
+    private List<Long> placesId;
+    private String personName;
+    private Long sessionId;
 
-    public Reservation toReservation(ReservationForm reservationForm) {
+    public Reservation toReservation(PlaceDao placeDao, SessionDao sessionDao, KinoUser kinoUser) {
+        List<Place> places = this.placesId.stream()
+                .map(id -> placeDao.findById(id).orElseThrow(() -> new ResponseException(HttpStatus.BAD_REQUEST, "Не найдено место с ID = " + id)))
+                .collect(Collectors.toList());
         Reservation reservation = new Reservation();
-        reservation.setBuy(reservation.getBuy());
+        reservation.setPlaces(places);
+        if (kinoUser != null)
+            reservation.setKinoUser(kinoUser);
+        BigDecimal price = new BigDecimal(0);
+        for (int i = 0; i < places.size(); i++) {
+            price = price.add(places.get(i).getHall().getPrice());
+        }
+        reservation.setStart(LocalDateTime.now());
+        reservation.setPrice(price);
+        reservation.setStatus(ReservationStatusEnum.booked);
+        Session session = sessionDao.findById(this.sessionId).orElseThrow(NullPointerException::new);
+        reservation.setEnd(session.getEnd().minusMinutes(30));
+        reservation.setPersonName(this.personName);
+        reservation.setSession(session);
+        Helper.auditOnCreate(reservation);
         return reservation;
     }
 }
