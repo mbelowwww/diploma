@@ -8,6 +8,7 @@ import openkino.com.models.Session;
 import openkino.com.models.TypeSession;
 import openkino.com.service.Helper;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
@@ -22,6 +23,7 @@ public class SessionForm {
     private Long idFilm;
     private Long idHall;
     private Long idTypeSession;
+    private BigDecimal price;
 
     public static Session toSession(SessionForm form, TypeSession typeSession, Hall hall, Film film) {
         Session session = new Session();
@@ -30,6 +32,7 @@ public class SessionForm {
         session.setTypeSession(typeSession);
         session.setHall(hall);
         session.setFilm(film);
+        session.setPrice(form.getPrice());
         Helper.auditOnCreate(session);
         return session;
     }

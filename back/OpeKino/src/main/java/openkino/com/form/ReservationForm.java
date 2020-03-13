@@ -25,18 +25,18 @@ public class ReservationForm {
         List<Place> places = this.placesId.stream()
                 .map(id -> placeDao.findById(id).orElseThrow(() -> new ResponseException(HttpStatus.BAD_REQUEST, "Не найдено место с ID = " + id)))
                 .collect(Collectors.toList());
+        Session session = sessionDao.findById(this.sessionId).orElseThrow(NullPointerException::new);
         Reservation reservation = new Reservation();
         reservation.setPlaces(places);
         if (kinoUser != null)
             reservation.setKinoUser(kinoUser);
         BigDecimal price = new BigDecimal(0);
         for (int i = 0; i < places.size(); i++) {
-            price = price.add(places.get(i).getHall().getPrice());
+            price = price.add(session.getPrice());
         }
         reservation.setStart(LocalDateTime.now());
         reservation.setPrice(price);
-        reservation.setStatus(ReservationStatusEnum.booked);
-        Session session = sessionDao.findById(this.sessionId).orElseThrow(NullPointerException::new);
+        reservation.setStatus(true);
         reservation.setEnd(session.getEnd().minusMinutes(30));
         reservation.setPersonName(this.personName);
         reservation.setSession(session);

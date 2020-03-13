@@ -19,7 +19,6 @@ public class HallForm {
         hall.setHeight(form.getHeight());
         hall.setWidth(form.getWidth());
         hall.setNumber(form.getNumber());
-        hall.setPrice(form.getPrice());
         return hall;
     }
 }

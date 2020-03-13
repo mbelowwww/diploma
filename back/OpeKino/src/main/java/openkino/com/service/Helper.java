@@ -12,7 +12,6 @@ public class Helper {
     }
     public static void auditOnUpdate(Object o){
         AuditEntity entity = (AuditEntity) o;
-        entity.setCreatedWhen(LocalDateTime.now());
         entity.setUpdatedWhen(LocalDateTime.now());
     }
 }

@@ -8,6 +8,7 @@ import lombok.Data;
 import openkino.com.view.Views;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,6 +16,10 @@ import java.util.List;
 @Entity
 @Table
 public class Session extends AuditEntity {
+
+    @JsonView(Views.Public.class)
+    @Column
+    private BigDecimal price;
 
     @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
     @JsonView(Views.Public.class)
