@@ -10,7 +10,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
+@Setter
+@Getter
+@NoArgsConstructor
 @Entity
 @Table
 public class Reservation extends AuditEntity {
@@ -47,16 +49,12 @@ public class Reservation extends AuditEntity {
     @JoinColumn
     private Session session;
 
-    @JsonView(Views.Public.class)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "reservation")
-    private List<Place> places;
+    private List<ReservationPlaces> reservationPlaces;
 
     @JsonView(Views.Public.class)
     @OneToOne
     private Buy buy;
-
-    public Reservation() {
-    }
 
     protected boolean canEqual(final Object other) {
         return other instanceof Reservation;

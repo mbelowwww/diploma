@@ -2,8 +2,9 @@ package openkino.com.form;
 
 import lombok.Data;
 import openkino.com.exceptions.ResponseException;
-import openkino.com.jpa.HallDao;
 import openkino.com.jpa.PlaceDao;
+import openkino.com.jpa.ReservationDao;
+import openkino.com.jpa.ReservationPlacesDao;
 import openkino.com.jpa.SessionDao;
 import openkino.com.models.*;
 import openkino.com.service.Helper;
@@ -21,13 +22,12 @@ public class ReservationForm {
     private String personName;
     private Long sessionId;
 
-    public Reservation toReservation(PlaceDao placeDao, SessionDao sessionDao, KinoUser kinoUser) {
+    public Reservation toReservation(PlaceDao placeDao, SessionDao sessionDao, ReservationDao reservationDao, ReservationPlacesDao reservationPlacesDao, KinoUser kinoUser) {
         List<Place> places = this.placesId.stream()
                 .map(id -> placeDao.findById(id).orElseThrow(() -> new ResponseException(HttpStatus.BAD_REQUEST, "Не найдено место с ID = " + id)))
                 .collect(Collectors.toList());
         Session session = sessionDao.findById(this.sessionId).orElseThrow(NullPointerException::new);
         Reservation reservation = new Reservation();
-        reservation.setPlaces(places);
         if (kinoUser != null)
             reservation.setKinoUser(kinoUser);
         BigDecimal price = new BigDecimal(0);
@@ -41,6 +41,18 @@ public class ReservationForm {
         reservation.setPersonName(this.personName);
         reservation.setSession(session);
         Helper.auditOnCreate(reservation);
+        reservationDao.save(reservation);
+        List<ReservationPlaces> reservationPlacesForSave = places.stream()
+                .map(p -> {
+                    ReservationPlaces reservationPlaces = new ReservationPlaces();
+                    Helper.auditOnCreate(reservationPlaces);
+                    reservationPlaces.setPlace(p);
+                    reservationPlaces.setReservation(reservation);
+                    return reservationPlaces;
+                })
+                .collect(Collectors.toList());
+        if (reservationPlacesForSave.size() > 0)
+            reservationPlacesDao.saveAll(reservationPlacesForSave);
         return reservation;
     }
 }
