@@ -7,5 +7,5 @@ import java.util.List;
 
 
 public interface CardDao extends JpaRepository<Card, Long> {
-    List<Card> findAllByKinoUserId(Long id);
+    List<Card> findAllByKinoUser_Id(Long id);
 }

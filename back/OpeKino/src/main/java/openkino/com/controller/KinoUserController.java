@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import openkino.com.models.KinoUser;
 import openkino.com.service.KinoUserService;
 import openkino.com.view.Views;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

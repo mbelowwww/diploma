@@ -12,7 +12,9 @@ public interface CardService {
 
     void deleteCardById(Long id);
 
-    List<Card> findCardsByIdKinoUser(KinoUser kinoUser);
+    List<Card> findAllCardsByIdFilmUser(KinoUser kinoUser);
+
+    Card findCardById(Long Id);
 
     Long addBalance(Long id, BigDecimal money);
 }
