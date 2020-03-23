@@ -1,0 +1,61 @@
+// main
+$primary_bold_color: #10476C;
+$primary_color: #0E649E;
+$primary_light_color: #2E75A7;
+$primary_super_light_color: #CAE9FE;
+$primary_input_color: #397CAA;
+$primary_input_error_color: #ff3d31;
+
+$gray: rgb(190,190,190);
+// sub color
+$header_item_color: #EE8200;
+
+// header
+$header_height: 100px;
+
+// button color
+$button_default_normal: #1EA4FF;
+$button_default_hover: #3EB1FF;
+$button_default_active: #0071BE;
+$button_default_disabled: #BAE3FF;
+// default
+$width_container: 1150px;
+
+$button_map: (
+  // button variables
+        button-default__color_normal: white,
+        button-default__border_normal: 1px solid #1EA4FF,
+        button-default__background-color_normal: #1EA4FF,
+
+        button-default__color_hover: white,
+        button-default__border_hover: 1px solid #3EB1FF,
+        button-default__background-color_hover: #3EB1FF,
+
+        button-default__color_active: white,
+        button-default__border_active: 1px solid #0071BE,
+        button-default__background-color_active: #0071BE,
+
+        button-default__color_disabled: white,
+        button-default__border_disabled: 1px solid #BAE3FF,
+        button-default__background-color_disabled: #BAE3FF,
+);
+
+:export {
+  primary_bold_color: $primary_bold_color;
+  primary_color: $primary_color;
+  primary_light_color: $primary_light_color;
+  primary_super_light_color: $primary_super_light_color;
+
+  primary_input_color: $primary_input_color;
+  primary_input_error_color: $primary_input_error_color;
+
+  header_item_color:$header_item_color;
+
+  button_default_normal: $button_default_normal;
+  button_default_hover: $button_default_hover;
+  button_default_active: $button_default_active;
+  button_default_disabled: $button_default_disabled;
+
+  gray: $gray;
+  white: white;
+}

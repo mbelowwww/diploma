@@ -1,0 +1,34 @@
+@import "variables";
+
+@mixin button_state($variable){
+  background-color: map-get($button_map, $variable#{'__background-color_normal'});
+  color: map-get($button_map, $variable#{'__color_normal'});
+  @if(map-get($button_map, $variable#{'__border_normal'})) {
+    border: map-get($button_map, $variable#{'__border_normal'});
+  }
+
+  &:hover {
+    background-color: map-get($button_map, $variable#{'__background-color_hover'});
+    color: map-get($button_map, $variable#{'__color_hover'});
+    @if(map-get($button_map, $variable#{'__border_hover'})) {
+      border: map-get($button_map, $variable#{'__border_hover'});
+    }
+  }
+
+  &:active, &[active="true"] {
+    background-color: map-get($button_map, $variable#{'__background-color_active'});
+    color: map-get($button_map, $variable#{'__color_active'});
+    @if(map-get($button_map, $variable#{'__border_active'})) {
+      border: map-get($button_map, $variable#{'__border_active'});
+    }
+  }
+
+  &:disabled, &[disabled="false"] {
+    cursor: default;
+    background-color: map-get($button_map, $variable#{'__background-color_disabled'});
+    color: map-get($button_map, $variable#{'__color_disabled'});
+    @if(map-get($button_map, $variable#{'__border_disabled'})) {
+      border: map-get($button_map, $variable#{'__border_disabled'});
+    }
+  }
+}
