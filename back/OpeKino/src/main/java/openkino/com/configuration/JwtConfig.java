@@ -16,7 +16,7 @@ public class JwtConfig {
     @Value("Bearer ")
     private String prefix;
 
-    @Value("#{24*60*60}")
+    @Value("#{7*24*60*60}")
     private int expiration;
 
     @Value("EXCLUSIVE_KEY")

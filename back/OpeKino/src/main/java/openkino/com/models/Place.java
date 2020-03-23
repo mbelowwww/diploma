@@ -27,9 +27,8 @@ public class Place extends AuditEntity {
     @Column
     private Integer x;
 
-    @ManyToOne
-    @JoinColumn
-    private Reservation reservation;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "place")
+    private List<ReservationPlaces> reservationPlaces;
 
     @ManyToOne
     @JoinColumn

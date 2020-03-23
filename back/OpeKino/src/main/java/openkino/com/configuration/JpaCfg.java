@@ -32,8 +32,8 @@ public class JpaCfg {
         hibernateProperties.put("hibernate.connection.charSet", "UTF-8");
         hibernateProperties.put("hibernate.format_sql", "true");
         hibernateProperties.put("hibernate.use_sql_comments", "true");
-//        hibernateProperties.put("hibernate.hbm2ddl.auto","create-drop");
-        hibernateProperties.put("hibernate.hbm2ddl.auto","update");
+        hibernateProperties.put("hibernate.hbm2ddl.auto","create-drop");
+//        hibernateProperties.put("hibernate.hbm2ddl.auto","update");
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setGenerateDdl(true);
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();

@@ -27,10 +27,6 @@ public class Hall extends AuditEntity {
     @Column
     private Integer height;
 
-    @JsonView(Views.Public.class)
-    @Column
-    private BigDecimal price;
-
     @OneToMany(mappedBy = "hall")
     @JsonManagedReference
     private List<Place> places;
@@ -83,11 +79,4 @@ public class Hall extends AuditEntity {
         this.sessions = sessions;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 }

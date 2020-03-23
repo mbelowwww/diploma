@@ -55,7 +55,7 @@ public class BasicAuthenticationVUFilter extends UsernamePasswordAuthenticationF
                                             Authentication auth) throws IOException, ServletException {
         if (auth != null){
             KinoUser kinoUser = (KinoUser) auth.getPrincipal();
-            if (!kinoUser.getAction()) throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Пользователь '"+kinoUser.getMail()+"' заблокирован!");
+            if (!kinoUser.getAction()) throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Пользователь '"+ kinoUser.getMail()+"' заблокирован!");
         }
         Long now = System.currentTimeMillis();
         String token = Jwts.builder()

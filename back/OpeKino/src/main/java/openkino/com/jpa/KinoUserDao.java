@@ -16,5 +16,5 @@ public interface KinoUserDao extends JpaRepository<KinoUser, Long> {
             "(UPPER(k.name) LIKE CONCAT('%',UPPER(?2),'%') OR k.name IS NULL) AND " +
             "(UPPER(k.lName) LIKE CONCAT('%',UPPER(?3),'%') OR k.lName IS NULL) AND" +
             "(UPPER(k.mail) LIKE CONCAT('%',UPPER(?4),'%') OR k.mail IS NULL)")
-    List<KinoUser> findByName(String fname, String name, String lname,String mail);
+    List<KinoUser> findByName(String fname, String name, String lname, String mail);
 }

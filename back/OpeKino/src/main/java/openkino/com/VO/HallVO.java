@@ -18,8 +18,6 @@ public class HallVO extends ModelVO {
     @JsonView(Views.Public.class)
     private Integer number;
 
-    @JsonView(Views.Public.class)
-    private BigDecimal price;
 
     @JsonView(Views.Public.class)
     private Integer quantityPlaces;
@@ -28,7 +26,6 @@ public class HallVO extends ModelVO {
         super(hall.getId());
         this.height = hall.getHeight();
         this.width = hall.getWidth();
-        this.price = hall.getPrice();
         this.number = hall.getNumber();
         this.quantityPlaces = hall.getPlaces().size();
     }

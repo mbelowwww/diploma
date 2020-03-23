@@ -1,19 +1,15 @@
 package openkino.com.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import openkino.com.VO.SessionVO;
 import openkino.com.form.SessionForm;
 import openkino.com.form.TypeSessionForm;
-import openkino.com.models.Session;
 import openkino.com.models.TypeSession;
 import openkino.com.service.SessionService;
 import openkino.com.view.Views;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -23,14 +19,14 @@ public class SessionController {
     private SessionService sessionService;
 
     @DeleteMapping("/{id}")
-    public void deleteSession(@PathVariable Long id){
+    public void deleteSession(@PathVariable Long id) {
         sessionService.deleteSessionById(id);
     }
 
     @JsonView(Views.Public.class)
     @PutMapping("/time")
-    public List<SessionVO> findAllByTime(@RequestBody SessionForm form){
-        return sessionService.findAllByTime(form.getStart(),form.getEnd());
+    public List<SessionVO> findAllByTime(@RequestBody SessionForm form) {
+        return sessionService.findAllByTime(form.getStart(), form.getEnd());
     }
 
     @GetMapping("/type/{id}")
