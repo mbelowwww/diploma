@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-buttons" :class="{'wrapper-buttons__vertical' : direction === 'vertical'}">
     <button v-for="button in buttons"
-            :class="[{'button-active' : selected === button || (selected && selected.key === button.key)},button.class]"
+            :class="[{'button-active' : selected === button || (selected && selected.key === button.key)}, button.class]"
             class="button_default"
             @click="$emit('click', button)">
       {{button.val}}

@@ -1,12 +1,12 @@
 <template>
   <div class="header">
-    <div class="header__logo">
+    <div class="header__logo" @click="$router.push({name: 'PageMain'}).catch(() => {})">
       <img src="@/assets/img/logo.png" width="171px" height="79px" alt="logo">
     </div>
     <AppButton :buttons="buttons" :selected="selected" @click="selectedButton"/>
     <div class="header__user">
-      <img src="@/assets/img/enter.png" class="header__user__enter" height="38px" width="38px" alt="">
-      <span>Вход</span>
+      <img src="@/assets/img/enter.png" class="header__user__enter" height="38px" width="38px" alt="login">
+      <span>{{userLogin}}</span>
     </div>
   </div>
 </template>
@@ -23,30 +23,36 @@ export default {
         {
           key: 'films',
           val: 'Фильмы',
-          classProp: ''
+          classProp: '',
+          to: 'PageFilms'
         },
         {
           key: 'session',
           val: 'Сеансы',
-          classProp: ''
+          classProp: '',
+          to: 'PageSessions'
         },
         {
           key: 'news',
           val: 'Новости',
-          classProp: ''
+          classProp: '',
+          to: 'PageNews'
         },
         {
           key: 'more',
           val: 'Ещё',
-          class: ''
+          class: '',
+          to: 'PageAdmin'
         }
       ],
-      selected: ''
+      selected: '',
+      userLogin: 'Вход'
     }
   },
   methods: {
-    selectedButton(button) {
+    selectedButton (button) {
       this.selected = this.buttons.find(item => item.key === button.key)
+      this.$router.push({ name: button.to })
     }
   }
 }

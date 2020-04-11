@@ -1,6 +1,6 @@
 <template>
-  <div class="main">
-
+  <div class="news">
+    <p>ЭТА СТРАНИЦА НОВОСТЕЙ</p>
   </div>
 </template>
 
@@ -11,7 +11,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.main {
-  height: calc(100vh - 140px);
-}
+
 </style>

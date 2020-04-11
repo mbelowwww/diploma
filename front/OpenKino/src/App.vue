@@ -12,6 +12,7 @@
 import TheHeader from './components/single/TheHeader'
 import TheFooter from './components/single/TheFooter'
 import AppCenter from './components/common/group/AppCenter'
+
 export default {
   components: {
     TheHeader, TheFooter, AppCenter

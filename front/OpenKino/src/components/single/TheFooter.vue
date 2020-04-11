@@ -1,12 +1,16 @@
 <template>
   <div class="footer">
-    © 2006-2020 Сеть кинотеатров «OpenKino» - все права защищены.
+    {{textFooter}}
   </div>
 </template>
 
 <script>
 export default {
-  name: 'TheFooter'
+  data () {
+    return {
+      textFooter: '© 2006-2020 Сеть кинотеатров «OpenKino» - все права защищены.'
+    }
+  }
 }
 </script>
 
