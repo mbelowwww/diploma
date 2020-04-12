@@ -1,10 +1,12 @@
 package openkino.com.service;
 
 
+import openkino.com.form.BuyForm;
 import openkino.com.models.Buy;
 
 public interface BuyService {
-    //    Long saveBuy(BuyMask buyMask, KinoUser kinoUser) ;//покупка c регистрацией
+    Long save(BuyForm buyForm);
+
     Buy findBuyById(Long id);
 
     void deleteBuyById(Long id);
