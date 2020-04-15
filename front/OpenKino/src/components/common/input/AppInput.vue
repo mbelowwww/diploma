@@ -6,7 +6,10 @@
       {{title}}
     </span>
     <input :type="type"
+           :disabled="isDisabled"
            :value="value"
+           :placeholder="placeholder"
+           :class="[classProp ? classProp : '']"
            class="container__input"
            @input="$emit('input', $event.target.value)"
     />
@@ -17,20 +20,29 @@
 export default {
   components: {},
   props: {
-    title: {
-      type: String,
-      default: ''
-    },
     value: {
       type: String,
       default: ''
     },
-    config: {
-      type: Object
+    title: {
+      type: String,
+      default: ''
     },
     type: {
       type: String,
       default: 'text'
+    },
+    isDisabled: {
+      type: Boolean,
+      default: false
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    classProp: {
+      type: String,
+      default: ''
     }
   }
 }
@@ -39,11 +51,16 @@ export default {
 <style scoped lang="scss">
 .container {
   &__title {
-    color: #1EA4FF;
+    color: #e0e094;
   }
   &__input {
     width: 100%;
     height: 40px;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 4px;
+    font-size: 18px;
   }
 }
+
 </style>
