@@ -18,7 +18,7 @@ public class Buy extends AuditEntity{
 
     @Column
     @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss")
-    private LocalDateTime localDateTime = LocalDateTime.now();
+    private LocalDateTime dateTime = LocalDateTime.now();
 
     @Column
     private BigDecimal price;

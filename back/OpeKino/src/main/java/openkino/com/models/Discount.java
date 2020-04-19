@@ -6,12 +6,12 @@ import lombok.Data;
 import openkino.com.view.Views;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 @Data
 @Entity
 @Table
 public class Discount extends AuditEntity{
-
 
     @JsonView(Views.Public.class)
     @Column
@@ -24,5 +24,9 @@ public class Discount extends AuditEntity{
     @JsonIgnore
     @OneToMany(mappedBy = "discount")
     private List<Buy> buys;
+
+    @Column(name = "DEPRECATED_FROM")
+    @JsonView(Views.Public.class)
+    private LocalDate deprecatedFrom;
 
 }
