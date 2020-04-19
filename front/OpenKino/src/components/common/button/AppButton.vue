@@ -1,9 +1,10 @@
 <template>
   <div class="wrapper-buttons" :class="{'wrapper-buttons__vertical' : direction === 'vertical'}">
     <button v-for="button in buttons"
-            :class="[{'button-active' : selected === button || (selected && selected.key === button.key)}, button.class]"
+            :class="[{'button-active' : selected === button || (selected && selected.key === button.key)},
+            {'button-auth-active' : selected === button || (selected && selected.key === button.key)}, button.class]"
             class="button_default"
-            @click="$emit('click', button)">
+            @click="choosedButton(button)">
       {{button.val}}
     </button>
   </div>
@@ -29,6 +30,17 @@ export default {
       default: '',
       require: false
     }
+  },
+  date () {
+    return {
+      newSelected: {}
+    }
+  },
+  methods: {
+    choosedButton (button) {
+      this.newSelected = this.buttons.find(item => item.key === button.key)
+      this.$emit('click', this.newSelected)
+    }
   }
 }
 </script>
@@ -53,5 +65,9 @@ export default {
   .button-active {
     background-color: rgba(255, 255, 255, 1);
     color: black;
+  }
+  .button-auth {
+    font-size: 24px;
+    color: #222222;
   }
 </style>

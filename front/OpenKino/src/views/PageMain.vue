@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <AppInput v-model="testInput" title="Поле для ввода:" placeholder="Введите значение"/>
+<!--    <AppInput v-model="testInput" title="Поле для ввода:" placeholder="Введите значение"/>-->
   </div>
 </template>
 

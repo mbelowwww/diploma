@@ -3,19 +3,27 @@
     <div class="header__logo" @click="$router.push({name: 'PageMain'}).catch(() => {})">
       <img src="@/assets/img/logo.png" width="171px" height="79px" alt="logo">
     </div>
-    <AppButton :buttons="buttons" :selected="selected" @click="selectedButton"/>
-    <div class="header__user">
+    <AppButton :buttons="buttons" :selected="selected" @click="selectedButton($event)"/>
+    <div class="header__user" @click="entryUser">
       <img src="@/assets/img/enter.png" class="header__user__enter" height="38px" width="38px" alt="login">
       <span>{{userLogin}}</span>
     </div>
+    <AppPopupWindow v-if="isWindowAuthorization">
+      <appAuthorization/>
+    </AppPopupWindow>
   </div>
 </template>
 
 <script>
 import AppButton from '../common/button/AppButton'
+import AppPopupWindow from '../popup/AppPopupWindow.vue'
+import AppAuthorization from '../single/TheAuthorization'
+
 export default {
   components: {
-    AppButton
+    AppButton,
+    AppPopupWindow,
+    AppAuthorization
   },
   data () {
     return {
@@ -23,19 +31,19 @@ export default {
         {
           key: 'films',
           val: 'Фильмы',
-          classProp: '',
+          class: '',
           to: 'PageFilms'
         },
         {
           key: 'session',
           val: 'Сеансы',
-          classProp: '',
+          class: '',
           to: 'PageSessions'
         },
         {
           key: 'news',
           val: 'Новости',
-          classProp: '',
+          class: '',
           to: 'PageNews'
         },
         {
@@ -46,13 +54,17 @@ export default {
         }
       ],
       selected: '',
-      userLogin: 'Вход'
+      userLogin: 'Вход',
+      isWindowAuthorization: false
     }
   },
   methods: {
     selectedButton (button) {
-      this.selected = this.buttons.find(item => item.key === button.key)
+      this.selected = button
       this.$router.push({ name: button.to })
+    },
+    entryUser (value) {
+      this.isWindowAuthorization = true
     }
   }
 }

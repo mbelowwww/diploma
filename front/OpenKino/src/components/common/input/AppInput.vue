@@ -43,13 +43,14 @@ export default {
     classProp: {
       type: String,
       default: ''
-    }
+    },
   }
 }
 </script>
 
 <style scoped lang="scss">
 .container {
+  margin: 10px 0;
   &__title {
     color: #e0e094;
   }
@@ -60,6 +61,7 @@ export default {
     border: 1px solid black;
     padding: 4px;
     font-size: 18px;
+    margin: 10px 0;
   }
 }
 
