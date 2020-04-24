@@ -1,5 +1,5 @@
 function setAuthorizationHeader () {
-  const user: string = localStorage.getItem('token')
+  const user = localStorage.getItem('token')
 
   if (user) {
     return { Authorization: `Bearer ${user}` }

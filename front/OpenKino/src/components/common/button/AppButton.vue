@@ -53,7 +53,7 @@ export default {
     }
   }
   .button_default {
-    width: 180px;
+    min-width: 180px;
     height: 40px;
     border: 2px solid white;
     border-radius: 5px;
@@ -61,6 +61,7 @@ export default {
     color: white;
     background-color: rgba(255, 255, 255, 0);
     cursor: pointer;
+    padding: 5px;
   }
   .button-active {
     background-color: rgba(255, 255, 255, 1);
@@ -69,5 +70,14 @@ export default {
   .button-auth {
     font-size: 24px;
     color: #222222;
+  }
+  .button-entry {
+    font-size: 24px;
+    background: #0071BE;
+  }
+  .button-reset-password {
+    color: #0E649E;
+    font-size: 18px;
+    text-decoration: underline;
   }
 </style>

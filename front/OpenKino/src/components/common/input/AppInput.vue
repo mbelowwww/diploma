@@ -43,7 +43,7 @@ export default {
     classProp: {
       type: String,
       default: ''
-    },
+    }
   }
 }
 </script>
@@ -52,7 +52,8 @@ export default {
 .container {
   margin: 10px 0;
   &__title {
-    color: #e0e094;
+    color: #222222;
+    background: white;
   }
   &__input {
     width: 100%;
@@ -61,7 +62,7 @@ export default {
     border: 1px solid black;
     padding: 4px;
     font-size: 18px;
-    margin: 10px 0;
+    margin: 5px 0;
   }
 }
 

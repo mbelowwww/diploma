@@ -9,7 +9,7 @@ import AppInput from '@/components/common/input/AppInput.vue'
 export default {
   name: 'PageMain',
   components: {
-    AppInput
+
   },
   data () {
     return {

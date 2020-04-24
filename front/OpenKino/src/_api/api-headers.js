@@ -1,8 +1,8 @@
-import AXIOS, { AxiosInstance } from 'axios'
+import AXIOS from 'axios'
 import { setAuthorizationHeader } from './auth-helper'
 
-const request: () => AxiosInstance = () => {
-  const request: AxiosInstance = AXIOS.create({
+const request = () => {
+  const request = AXIOS.create({
     // baseURL: process.env.VUE_APP_AXIOS_URL,
     headers: {
       ...setAuthorizationHeader()
