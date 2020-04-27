@@ -72,7 +72,11 @@ export default {
     color: #222222;
   }
   .button-entry {
-    font-size: 24px;
+    font-size: 20px;
+    background: #0071BE;
+  }
+  .button-registration {
+    font-size: 20px;
     background: #0071BE;
   }
   .button-reset-password {

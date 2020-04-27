@@ -1,8 +1,8 @@
 <template>
   <div class="container-auth">
     <AppButton :buttons="valueAuthAndReg" :selected="selected" @click="selected = $event" class="container-auth__buttons"/>
-    <TheLogin v-if="selected.key === 'entry' || !selected.key"/>
-    <TheRegistration v-else-if="selected.key === 'registration'"/>
+    <TheLogin v-if="selected.key === 'entry' || !selected.key" @selectedLogin="entryUser"/>
+    <TheRegistration v-else-if="selected.key === 'registration'" @selectedRegistration="registrationUser"/>
   </div>
 </template>
 
@@ -27,6 +27,14 @@ export default {
         key: '',
         val: ''
       }
+    }
+  },
+  methods: {
+    entryUser (value) {
+      this.$store.dispatch('auth/userAuthorization', value)
+    },
+    registrationUser (value) {
+      this.$store.dispatch('auth/userRegistration', value)
     }
   }
 }

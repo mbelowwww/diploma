@@ -8,8 +8,8 @@
       <img src="@/assets/img/enter.png" class="header__user__enter" height="38px" width="38px" alt="login">
       <span>{{userLogin}}</span>
     </div>
-    <AppPopupWindow v-if="isWindowAuthorization">
-      <appAuthorization/>
+    <AppPopupWindow v-if="isWindowAuthorization" @close="isWindowAuthorization = false">
+      <AppAuthorization/>
     </AppPopupWindow>
   </div>
 </template>

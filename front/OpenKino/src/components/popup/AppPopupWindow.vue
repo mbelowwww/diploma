@@ -1,12 +1,21 @@
 <template>
-  <div class="container-popup">
+  <div class="container-popup" @click.prevent.self="closeWindow">
     <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-
+  components: {},
+  data () {
+    return {
+    }
+  },
+  methods: {
+    closeWindow () {
+      this.$emit('close')
+    }
+  }
 }
 </script>
 

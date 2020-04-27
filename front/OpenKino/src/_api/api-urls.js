@@ -1,4 +1,4 @@
-const authorization = {
+const auth = {
   REGISTRATION_USER: '/kinouser',
   AUTHORIZATION_USER: '/auth'
 }
@@ -7,12 +7,12 @@ const films = {
 }
 
 const url = {
-  authorization,
+  auth,
   films
 }
 
 export {
-  authorization,
+  auth,
   films
 }
 

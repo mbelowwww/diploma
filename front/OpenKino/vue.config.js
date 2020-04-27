@@ -1,5 +1,8 @@
 module.exports = {
   lintOnSave: false,
+  devServer: {
+    proxy: 'http://localhost:8083'
+  },
   css: {
     loaderOptions: {
       scss: {

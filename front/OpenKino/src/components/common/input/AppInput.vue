@@ -58,7 +58,7 @@ export default {
   &__input {
     width: 100%;
     height: 40px;
-    border-radius: 5px;
+    border-radius: 3px;
     border: 1px solid black;
     padding: 4px;
     font-size: 18px;

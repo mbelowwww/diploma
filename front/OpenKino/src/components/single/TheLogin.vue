@@ -1,7 +1,8 @@
 <template>
   <div class="container-login">
-    <AppInput v-for="auth in dataLogin" v-model="auth.value" :title="auth.title" :placeholder="auth.placeholder"/>
-    <AppButton :selected="selected" :buttons="buttons" @click="selected = $event" class="container-login__buttons"/>
+    <AppInput v-model="dataLogin.mail" :placeholder="inputConfig.mail.placeholder"/>
+    <AppInput v-model="dataLogin.password" :placeholder="inputConfig.password.placeholder"/>
+    <AppButton :selected="selected" :buttons="buttons" @click="selectedLogin" class="container-login__buttons"/>
   </div>
 </template>
 
@@ -16,35 +17,39 @@ export default {
   },
   data () {
     return {
-      dataLogin: [
-        {
-          key: 1,
-          value: '',
-          placeholder: 'Логин',
-          // title: 'Логин',
-          mail: ''
-        },
-        {
-          key: 2,
-          value: '',
-          placeholder: 'Пароль',
-          // title: 'Пароль',
-          password: ''
-        }
-      ],
+      dataLogin: {
+        mail: '',
+        password: ''
+      },
       selected: {},
       buttons: [
         {
           val: 'Войти',
-          key: 1,
+          key: 'authorization',
           class: 'button-entry'
         },
         {
           val: 'Забыли пароль',
-          key: 2,
+          key: 'resetPassword',
           class: 'button-reset-password'
         }
-      ]
+      ],
+      inputConfig: {
+        mail: {
+          placeholder: 'Введите почту',
+          title: ''
+        },
+        password: {
+          placeholder: 'Введите пароль',
+          title: ''
+        }
+      }
+    }
+  },
+  methods: {
+    selectedLogin (value) {
+      this.selected = value
+      this.$emit('selectedLogin', this.dataLogin)
     }
   }
 }
