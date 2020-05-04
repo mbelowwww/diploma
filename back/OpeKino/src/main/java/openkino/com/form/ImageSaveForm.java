@@ -35,7 +35,7 @@ public class ImageSaveForm {
                         .replace(";base64", "");
                 String imgBase64 = formatBase64[1];
                 BASE64Decoder decoder = new BASE64Decoder();
-                image.setImage_array(decoder.decodeBuffer(imgBase64));
+                image.setImage(decoder.decodeBuffer(imgBase64));
                 image.setType(typeImg);
                 image.setCreatedWhen(LocalDateTime.now());
                 image.setUpdatedWhen(LocalDateTime.now());

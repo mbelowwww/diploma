@@ -15,7 +15,7 @@ public class CardForm {
         ResponseException.nullHandler(kinoUser,"Пользователь не найден!");
         Card card = new Card();
         card.setBalance(this.balance);
-        card.setNumber(number);
+        card.setId(number);
         card.setKinoUser(kinoUser);
         return card;
     }

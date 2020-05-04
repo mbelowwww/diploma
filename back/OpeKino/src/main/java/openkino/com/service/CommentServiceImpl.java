@@ -37,7 +37,7 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Long updateComment(Comment comment) {
         Comment comment1 = commentDao.findById(comment.getId()).get();
-        comment1.setDate(LocalDateTime.now(ZoneId.of("UTC+4")));
+        comment1.setDateTime(LocalDateTime.now(ZoneId.of("UTC+4")));
         comment1.setComment(comment.getComment());
         return commentDao.save(comment1).getId();
     }

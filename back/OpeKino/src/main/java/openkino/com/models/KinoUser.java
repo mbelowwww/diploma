@@ -13,7 +13,6 @@ import java.util.List;
 
 @Entity
 @Table
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class KinoUser extends AuditEntity implements UserDetails{
 
     @JsonView(Views.Public.class)
@@ -58,6 +57,12 @@ public class KinoUser extends AuditEntity implements UserDetails{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "kinoUser")
     private List<UserBan> userBan;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "kinoUser")
+    private List<Comment> comments;
+
+    public KinoUser() {
+    }
+
     @JsonIdentityInfo(
             generator = ObjectIdGenerators.PropertyGenerator.class,
             property = "id")
@@ -67,12 +72,6 @@ public class KinoUser extends AuditEntity implements UserDetails{
 
     public void setUserBan(List<UserBan> userBan) {
         this.userBan = userBan;
-    }
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "kinoUser")
-    private List<Comment> comments;
-
-    public KinoUser() {
     }
 
     public String getfName() {

@@ -1,11 +1,16 @@
 package openkino.com.service;
 
 import lombok.AllArgsConstructor;
+import openkino.com.VO.BuyVO;
 import openkino.com.form.BuyForm;
 import openkino.com.jpa.*;
 import openkino.com.models.Buy;
+import openkino.com.models.KinoUser;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -18,8 +23,10 @@ public class BuyServiceImpl implements BuyService {
     private final DiscountDao discountDao;
 
     @Override
-    public Buy findBuyById(Long id) {
-        return buyDao.findById(id).get();
+    @Transactional
+    public BuyVO findBuyById(Long id) {
+        Buy buy = buyDao.findById(id).get();
+        return new BuyVO(buy);
     }
 
     @Override
@@ -31,5 +38,13 @@ public class BuyServiceImpl implements BuyService {
     @Override
     public void deleteBuyById(Long id) {
         buyDao.deleteById(id);
+    }
+
+    @Override
+    public List<BuyVO> findByKinoUserId(KinoUser kinoUser) {
+        return buyDao.findAllByKinoUser_Id(kinoUser.getId())
+                .stream()
+                .map(BuyVO::new)
+                .collect(Collectors.toList());
     }
 }

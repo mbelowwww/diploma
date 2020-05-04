@@ -23,11 +23,6 @@ public class Buy extends AuditEntity{
     @Column
     private BigDecimal price;
 
-    @JsonIdentityInfo(
-            generator = ObjectIdGenerators.PropertyGenerator.class,
-            property = "id"
-    )
-    @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne
     @JoinColumn
     private Card card;

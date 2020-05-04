@@ -37,6 +37,7 @@ public class ReservationVO extends ModelVO {
     public ReservationVO(Reservation reservation) {
         super(reservation.getId());
         this.session = new SessionVO(reservation.getSession());
+        this.price = reservation.getPrice();
         this.start = reservation.getStart();
         this.end = reservation.getEnd();
         this.kinoUserId = reservation.getKinoUser() != null ? reservation.getKinoUser().getId() : null;

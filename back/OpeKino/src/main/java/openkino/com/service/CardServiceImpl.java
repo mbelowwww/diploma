@@ -24,7 +24,7 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public Long saveCard(CardForm card, KinoUser kinoUser) {
-        return cardDao.save(card.toCard(kinoUser)).getNumber();
+        return cardDao.save(card.toCard(kinoUser)).getId();
     }
 
     @Override
@@ -51,7 +51,7 @@ public class CardServiceImpl implements CardService {
             card.setBalance(card.getBalance().add(money));
         }
         cardDao.save(card);
-        return card.getNumber();
+        return card.getId();
     }
 
     public Card findCard(Long id) {

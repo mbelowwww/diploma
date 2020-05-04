@@ -19,18 +19,18 @@ public class Image extends AuditEntity{
 
     @JsonView(Views.Public.class)
     @Column(columnDefinition = "BINARY(5000000)")
-    private byte[] image_array;
+    private byte[] image;
 
     @ManyToOne
     private Film film;
 
 
-    public byte[] getImage_array() {
-        return image_array;
+    public byte[] getImage() {
+        return image;
     }
 
-    public void setImage_array(byte[] image_array) {
-        this.image_array = image_array;
+    public void setImage(byte[] image_array) {
+        this.image = image_array;
     }
 
     public Film getFilm() {

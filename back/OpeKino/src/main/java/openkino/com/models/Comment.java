@@ -22,7 +22,7 @@ public class Comment extends AuditEntity{
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonView(Views.Public.class)
     @Column
-    private LocalDateTime date;
+    private LocalDateTime dateTime;
 
     @JsonView(Views.Public.class)
     @ManyToOne
@@ -42,12 +42,12 @@ public class Comment extends AuditEntity{
         this.comment = comment;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime date) {
+        this.dateTime = date;
     }
 
     public KinoUser getKinoUser() {

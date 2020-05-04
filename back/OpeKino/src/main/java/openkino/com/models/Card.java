@@ -2,6 +2,7 @@ package openkino.com.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ import java.util.List;
 public class Card {
 
     @Id
-    private Long number;
+    private Long id;
 
     @Column
     private BigDecimal balance;
@@ -33,6 +34,7 @@ public class Card {
     @JoinColumn
     private KinoUser kinoUser;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "card")
     private List<Buy> buys;
 }

@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -147,7 +146,7 @@ public class FilmServiceImpl implements FilmService {
     public Long loadImageUpdate(MultipartFile file, Long id) throws IOException {
         Image image = imageDao.findById(id).get();
         byte[] array = file.getBytes();
-        image.setImage_array(array);
+        image.setImage(array);
         image.setType(file.getContentType());
         Helper.auditOnUpdate(image);
         return imageDao.save(image).getId();
