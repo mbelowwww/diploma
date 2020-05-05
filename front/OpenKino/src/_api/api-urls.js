@@ -1,9 +1,11 @@
 const auth = {
   REGISTRATION_USER: '/kinouser',
-  AUTHORIZATION_USER: '/auth'
+  AUTHORIZATION_USER: '/auth',
+  LIST_USERS: '/kinouser/all'
 }
 const films = {
-  GET_FILMS_SEARCH: '/film'
+  USE_FILMS: '/film',
+  ADD_IMAGE: '/film/image'
 }
 
 const url = {

@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper-buttons" :class="{'wrapper-buttons__vertical' : direction === 'vertical'}">
-    <button v-for="button in buttons"
+    <button v-for="(button, index) in buttons"
+            :key="index"
             :class="[{'button-active' : selected === button || (selected && selected.key === button.key)},
             {'button-auth-active' : selected === button || (selected && selected.key === button.key)}, button.class]"
             class="button_default"

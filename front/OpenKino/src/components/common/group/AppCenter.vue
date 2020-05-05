@@ -1,5 +1,5 @@
 <template>
-  <div class="center" :class="{'center__vertical' : vertical}">
+  <div class="center" :class="{'center__vertical' : isVertical, 'center__admin' : isAdmin}">
     <slot></slot>
   </div>
 </template>
@@ -8,7 +8,11 @@
 export default {
   name: 'AppCenter',
   props: {
-    vertical: {
+    isVertical: {
+      type: Boolean,
+      default: false
+    },
+    isAdmin: {
       type: Boolean,
       default: false
     }
@@ -24,6 +28,9 @@ export default {
   margin: 0 auto;
   &__vertical {
     flex-direction: column;
+  }
+  &__admin {
+    max-width: 1000px;
   }
 }
 </style>

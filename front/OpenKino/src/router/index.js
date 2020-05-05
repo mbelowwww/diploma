@@ -27,8 +27,11 @@ const routes = [
   {
     path: '/admin',
     name: 'PageAdmin',
-    component: () => import('../views/PageAdmin.vue')
-  },
+    component: () => import('../views/PageAdmin.vue'),
+    meta: {
+      isAdmin: true
+    }
+  }
 ]
 
 const router = new VueRouter({
@@ -36,5 +39,13 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+// router.beforeEach((to, before, next) => {
+//   if (to.matched.some(record => record.meta.isAdmin)) {
+//     next({ path: '/admin' })
+//   } else {
+//     next({ path: '/' })
+//   }
+// })
 
 export default router

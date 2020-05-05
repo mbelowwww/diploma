@@ -18,6 +18,7 @@
 
 <script>
 export default {
+  name: 'AppSearch',
   components: {},
   props: {
     value: {
@@ -49,27 +50,23 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.container {
-  margin: 10px 0;
-  &__title {
-    color: #222222;
-    background: white;
-  }
-  &__input {
-    width: 100%;
-    height: 40px;
-    border-radius: 3px;
-    border: 1px solid black;
-    padding: 4px;
-    font-size: 18px;
-    margin: 5px 0;
-  }
-  &__input-line {
-    border-bottom: 2px solid #222222;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-  }
-}
+  .container {
+    margin: 10px 0;
+    &__title {
+      color: #222222;
+      background: white;
+    }
+    &__input {
+      width: 100%;
+      height: 40px;
+      border-radius: 3px;
+      border: 1px solid black;
+      padding: 4px;
+      font-size: 18px;
+      margin: 5px 0;
+      background: #222222;
+      color: white;
 
+    }
+  }
 </style>
