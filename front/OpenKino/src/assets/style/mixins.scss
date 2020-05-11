@@ -1,4 +1,4 @@
-@import "variables";
+@import "variables.scss";
 
 @mixin button_state($variable){
   background-color: map-get($button_map, $variable#{'__background-color_normal'});

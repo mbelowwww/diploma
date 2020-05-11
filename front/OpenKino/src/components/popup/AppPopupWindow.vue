@@ -23,7 +23,7 @@ export default {
   .container-popup {
     width: 100vw;
     height: 100vh;
-    background-color: rgba(24, 17, 4, 0.5);
+    background-color: rgba(24, 17, 4, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;

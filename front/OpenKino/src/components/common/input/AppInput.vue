@@ -21,8 +21,7 @@ export default {
   components: {},
   props: {
     value: {
-      type: String,
-      default: ''
+      /* Здесь должен быть хотя бы type */
     },
     title: {
       type: String,

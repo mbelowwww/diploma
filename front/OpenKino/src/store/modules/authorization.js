@@ -22,7 +22,7 @@ const authorationModule = {
         return response
       })
     },
-    getListofUsers (_, data) {
+    getListOfUsers (_, data) {
       return request().get(auth.LIST_USERS).then((response) => {
         return response
       })
