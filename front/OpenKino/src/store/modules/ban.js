@@ -15,8 +15,8 @@ const banModule = {
         return response
       })
     },
-    toNoBan (_, data) {
-      return request().put(ban.TO_BAN)
+    toNoBan (_, id) {
+      return request().put(ban.TO_BAN + `/${id}`)
     }
   }
 }

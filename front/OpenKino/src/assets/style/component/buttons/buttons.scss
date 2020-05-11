@@ -1,0 +1,16 @@
+.single-button {
+  width: 180px;
+  min-height: 40px;
+  padding: 10px;
+  background: #3EB1FF;
+  color: #222222;
+  border: none;
+  border-radius: 3px;
+  font-size: 18px;
+  margin: 40px 0;
+  &:hover {
+    cursor: pointer;
+    background: #0E649E;
+    color: white;
+  }
+}

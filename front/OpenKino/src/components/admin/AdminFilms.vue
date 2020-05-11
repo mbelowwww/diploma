@@ -32,6 +32,7 @@
     <!--popup Add Film-->
     <AppPopupWindow v-if="isAddFilm" @close="isAddFilm = false">
       <div class="popup-admin-film">
+        <!-- Можно было бы выделить в отдельный компонент -->
         <AppInput v-model="dataFilm.name" :placeholder="inputConfig.inputFilmName.placeholder" classProp="container__input-line"/>
         <AppInput v-model="dataFilm.description" :placeholder="inputConfig.inputFilmDescription.placeholder" classProp="container__input-line"/>
         <AppInput v-model="dataFilm.length" :placeholder="inputConfig.inputFilmLength.placeholder" classProp="container__input-line"/>

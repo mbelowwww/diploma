@@ -7,7 +7,9 @@
     <AppInput v-model="dataRegistration.age" :placeholder="inputConfig.age.placeholder"/>
     <AppInput v-model="dataRegistration.phone" :placeholder="inputConfig.phone.placeholder"/>
     <AppInput v-model="dataRegistration.mail" :placeholder="inputConfig.mail.placeholder"/>
-    <AppButton :selected="selected" :buttons="buttons" @click="selectedRegistration" class="container-registration__buttons"/>
+    <slot name="button">
+      <AppButton :selected="selected" :buttons="buttons" @click="selectedRegistration" class="container-registration__buttons"/>
+    </slot>
   </div>
 </template>
 
@@ -16,21 +18,21 @@ import AppInput from '../common/input/AppInput'
 import AppButton from '../common/button/AppButton'
 export default {
   name: 'TheRegistration',
+  props: {
+    dataRegistration: {
+      type: Object
+    },
+    isChangeUser: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {
     AppInput,
     AppButton
   },
   data () {
     return {
-      dataRegistration: {
-        fName: '',
-        name: '',
-        lName: '',
-        password: '',
-        age: '',
-        phone: '',
-        mail: ''
-      },
       selected: {},
       buttons: [
         {
@@ -74,7 +76,11 @@ export default {
   methods: {
     selectedRegistration (value) {
       this.selected = value
-      this.$emit('selectedRegistration', this.dataRegistration)
+      if (!this.isChangeUser) {
+        this.$emit('selectedRegistration', this.dataRegistration)
+      } else {
+        this.$emit('changeUser', this.dataRegistration)
+      }
     }
   }
 }
