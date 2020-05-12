@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import openkino.com.models.KinoUser;
 import openkino.com.service.KinoUserService;
 import openkino.com.view.Views;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,5 +56,11 @@ public class KinoUserController {
     @GetMapping("/{id}")
     public KinoUser get(@PathVariable Long id) {
         return kinoUserService.findKinoUserById(id);
+    }
+
+    @JsonView(Views.Public.class)
+    @GetMapping("")
+    public KinoUser findByAuth(@AuthenticationPrincipal KinoUser kinoUser){
+        return kinoUserService.findByAuth(kinoUser);
     }
 }

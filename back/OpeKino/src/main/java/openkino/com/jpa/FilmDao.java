@@ -12,7 +12,6 @@ public interface FilmDao extends JpaRepository<Film, Long> {
     @Query("select f from Film f join f.genre g where g.id = :id")
     List<Film> findAllByGenreId(@Param("id") Long id);
 
-
     @Query(value = " SELECT FILM.*" +
             " FROM FILM " +
             "    inner join GENRE on GENRE.ID = FILM.ID_GENRE " +

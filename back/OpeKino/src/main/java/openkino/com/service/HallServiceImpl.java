@@ -10,6 +10,7 @@ import openkino.com.models.AuditEntity;
 import openkino.com.models.Hall;
 import openkino.com.models.Place;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,6 +23,7 @@ public class HallServiceImpl implements HallService {
     private final PlaceDao placeDao;
 
     @Override
+    @Transactional
     public Long save(HallForm hallForm) {
         Hall hall = new HallForm().toHall(hallForm);
         hallDao.save(hall);

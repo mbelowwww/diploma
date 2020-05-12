@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CommentDao extends JpaRepository<Comment, Long> {
     List<Comment> findAllByFilmId(Long id_film);
+
+    List<Comment> findAllByKinoUser_Id(Long kinoUserId);
 }

@@ -15,10 +15,6 @@ public class Comment extends AuditEntity{
     @Column
     private String comment;
 
-    @JsonView(Views.Public.class)
-    @Column
-    private Rating rating;
-
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @JsonView(Views.Public.class)
     @Column
