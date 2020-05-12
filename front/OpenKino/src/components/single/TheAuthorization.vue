@@ -2,7 +2,7 @@
   <div class="container-auth">
     <AppButton :buttons="valueAuthAndReg" :selected="selected" @click="selected = $event" class="container-auth__buttons"/>
     <TheLogin v-if="selected.key === 'entry' || !selected.key" @selectedLogin="entryUser"/>
-    <TheRegistration v-else-if="selected.key === 'registration'" @selectedRegistration="registrationUser"/>
+    <TheRegistration v-else-if="selected.key === 'registration'" :dataRegistration="dataRegistration" @selectedRegistration="registrationUser"/>
   </div>
 </template>
 
@@ -18,6 +18,15 @@ export default {
   },
   data () {
     return {
+      dataRegistration: {
+        fName: '',
+        name: '',
+        lName: '',
+        password: '',
+        age: '',
+        phone: '',
+        mail: ''
+      },
       valueAuthAndReg: [
         { val: 'Войти', key: 'entry', class: 'button-auth' },
         { val: 'Регистрация', key: 'registration', class: 'button-auth' }

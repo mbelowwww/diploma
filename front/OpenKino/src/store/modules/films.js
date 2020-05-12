@@ -13,8 +13,8 @@ const filmsModule = {
         return response
       })
     },
-    deleteFilm (_, id) {
-      return request().post(films.USE_FILMS + `/${id}`).then((response) => {
+    deleteFilm (_, data) {
+      return request().delete(films.USE_FILMS + `/${data.id}`).then((response) => {
         return response
       })
     },
@@ -26,13 +26,21 @@ const filmsModule = {
     getFilm (_, data) {
       return request().get(films.USE_FILMS, {
         params: {
-          name: data.name,
-          limitAge: data.limitAge,
-          rating: data.rating,
-          genre: data.genre
+          name: data,
+          // limitAge: data.limitAge,
+          // rating: data.rating,
+          // genre: data.genre
         }
       }).then((response) => {
-        return response
+        return response.data.map(item => ({
+          ...item,
+          genre: {
+            key: item.genre.id,
+            val: item.genre.name,
+            id: item.genre.id,
+            name: item.genre.name
+          }
+        }))
       })
     },
     addImages (_, data) {

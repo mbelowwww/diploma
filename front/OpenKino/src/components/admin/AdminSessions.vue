@@ -1,12 +1,19 @@
 <template>
   <div class="container-sessions">
-    <span>Сеансы</span>
+    <AppSearch v-model="searchSession" placeholder="Поиск по фильму"/>
   </div>
 </template>
 
 <script>
+import AppSearch from '../common/input/AppSearch'
 export default {
-  name: 'AdminSessions'
+  name: 'AdminSessions',
+  components: { AppSearch },
+  data () {
+    return {
+      searchSession: ''
+    }
+  }
 }
 </script>
 

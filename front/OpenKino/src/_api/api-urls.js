@@ -7,15 +7,20 @@ const films = {
   USE_FILMS: '/film',
   ADD_IMAGE: '/film/image'
 }
+const ban = {
+  TO_BAN: 'ban'
+}
 
 const url = {
   auth,
-  films
+  films,
+  ban
 }
 
 export {
   auth,
-  films
+  films,
+  ban
 }
 
 export default url

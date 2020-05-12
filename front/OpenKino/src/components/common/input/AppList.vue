@@ -1,10 +1,10 @@
 <template>
-  <ul class="sp-list">
+  <ul :class="classContainer">
     <li v-for="(item, index) in list"
         :key="index"
         class="sp-list__item"
-        :class="[classItem, {'sp-list__item_selected': selected === item}]"
-        @click="$emit('click', item)"
+        :class="[classItem, {'sp-list__item_selected': selected === item }]"
+        @click="clickByItem($event, item)"
     >
       <slot name="item" :item="item" :index="index">
         {{item}}
@@ -24,13 +24,28 @@ export default {
     },
     classItem: {
       type: String,
-      require: false
+      require: false,
+      default: ''
     },
     selected: {
+    },
+    classContainer: {
+      type: String,
+      default: 'sp-list'
+    },
+    isDisabledClick: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
+    }
+  },
+  methods: {
+    clickByItem ($event, item) {
+      $event.stopPropagation()
+      this.$emit('click', item)
     }
   }
 }
@@ -39,9 +54,8 @@ export default {
 <style scoped lang="scss">
 .sp-list {
   overflow: auto;
-  flex-grow: 1;
-  height: 1px;
 
+  height: 100%;
   &__item {
     cursor: pointer;
     margin-top: 10px;
@@ -49,10 +63,10 @@ export default {
     align-items: center;
     display: flex;
     flex-shrink: 0;
-    &:hover {
-      background-color: #1EA4FF;
-      color: white;
-    }
+    /*&:hover {*/
+    /*  background-color: #1EA4FF;*/
+    /*  color: white;*/
+    /*}*/
 
     &_selected {
       background-color: #1EA4FF;

@@ -22,8 +22,13 @@ const authorationModule = {
         return response
       })
     },
-    getListofUsers (_, data) {
+    getListOfUsers (_, data) {
       return request().get(auth.LIST_USERS).then((response) => {
+        return response
+      })
+    },
+    changeUser (_, data) {
+      return request().put(auth.REGISTRATION_USER, data).then((response) => {
         return response
       })
     }
