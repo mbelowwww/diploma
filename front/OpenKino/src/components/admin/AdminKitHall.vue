@@ -1,7 +1,7 @@
 <template>
-  <div class="container-kit-hall" v-if="widthHall && heightHall">
-    <div v-for="(item, index) in widthHall" :key="index">
-      <div class="place" v-for="(item2, index2) in heightHall" :key="index2" @click="getPlace(index, index2)"></div>
+  <div class="container-kit-hall">
+    <div v-for="(item, index) in places" :key="index">
+      <div class="place" v-for="(item2, index2) in item" :key="index2" @click="getPlace(index, index2)"></div>
     </div>
 
   </div>
@@ -12,18 +12,18 @@ export default {
   name: 'AdminKitHall',
   components: {},
   props: {
-    widthHall: {
-      type: Number,
-      default: 0
-    },
-    heightHall: {
-      type: Number,
-      default: 0
+    places: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data () {
+    return {
     }
   },
   methods: {
     getPlace (i, j) {
-      console.log(i, j)
+      // console.log('x: ', i, 'y: ', j)
     }
   }
 }

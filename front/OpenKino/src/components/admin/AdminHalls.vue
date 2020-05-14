@@ -5,11 +5,12 @@
     </div>
     <div class="container-halls__create-hall">
       <div class="container-halls__head">
-        <AppInput v-model.number="dataWidthAndHeight.width" placeholder="Введите ширину зала" inputSize="200"/>
+        <AppInput v-model.number="dataWidthAndHeight.width" placeholder="Введите ширину зала" inputSize="200" class="container-halls__head__amount"/>
         <AppInput v-model.number="dataWidthAndHeight.height" placeholder="Введите высоту зала" inputSize="200" class="container-halls__head__amount"/>
+        <AppInput v-model.number="dataWidthAndHeight.number" placeholder="Введите номер зала" inputSize="200" class="container-halls__head__amount"/>
         <button class="single-button">Сформировать</button>
       </div>
-      <AdminKitHall :widthHall="dataWidthAndHeight.width" :heightHall="dataWidthAndHeight.height">
+      <AdminKitHall :places="createdArray">
 
       </AdminKitHall>
     </div>
@@ -27,8 +28,28 @@ export default {
   data () {
     return {
       dataWidthAndHeight: {
-        width: 0,
-        height: 0
+        width: '',
+        height: '',
+        number: ''
+      },
+      createdArray: []
+    }
+  },
+  methods: {
+  },
+  watch: {
+    dataWidthAndHeight: {
+      deep: true,
+      immediate: true,
+      handler (val) {
+        if (val.height && val.width) {
+          for (let i = 0; i < val.width; i++) {
+            this.$set(this.createdArray, i, [])
+            for (let j = 0; j < val.height; j++) {
+              this.$set(this.createdArray[i], j, { x: j + 1, y: i + 1 })
+            }
+          }
+        }
       }
     }
   }
@@ -57,7 +78,7 @@ export default {
       display: flex;
       padding: 10px 0;
       &__amount {
-        margin: 10px 20px 0;
+        margin: 10px 20px 0 0;
       }
     }
   }
