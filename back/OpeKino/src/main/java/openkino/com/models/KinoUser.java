@@ -1,6 +1,8 @@
 package openkino.com.models;
 
 import com.fasterxml.jackson.annotation.*;
+import lombok.Getter;
+import lombok.Setter;
 import openkino.com.view.Views;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,6 +15,8 @@ import java.util.List;
 
 @Entity
 @Table
+@Setter
+@Getter
 public class KinoUser extends AuditEntity implements UserDetails{
 
     @JsonView(Views.Public.class)
@@ -27,7 +31,6 @@ public class KinoUser extends AuditEntity implements UserDetails{
     @Column
     private String lName;
 
-    @JsonView(Views.Public.class)
     @Column
     private String password;
 
@@ -70,98 +73,14 @@ public class KinoUser extends AuditEntity implements UserDetails{
         return userBan;
     }
 
-    public void setUserBan(List<UserBan> userBan) {
-        this.userBan = userBan;
-    }
-
-    public String getfName() {
-        return fName;
-    }
-
-    public void setfName(String fName) {
-        this.fName = fName;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public List<Card> getCards() {
-        return cards;
-    }
-
     @JsonIgnore
     public void setCards(List<Card> cards) {
         this.cards = cards;
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public String getlName() {
-        return lName;
-    }
-
-    public void setlName(String lName) {
-        this.lName = lName;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
     @JsonIgnore
     public void setComments(List<Comment> comments) {
         this.comments = comments;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getAction() {
-        return action;
-    }
-
-    public void setAction(Boolean action) {
-        this.action = action;
     }
 
     @Override
@@ -193,13 +112,5 @@ public class KinoUser extends AuditEntity implements UserDetails{
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public String getLName() {
-        return lName;
-    }
-
-    public void setLName(String lname) {
-        this.lName = lname;
     }
 }

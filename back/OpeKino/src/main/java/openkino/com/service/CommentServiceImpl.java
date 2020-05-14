@@ -1,50 +1,61 @@
 package openkino.com.service;
 
+import lombok.AllArgsConstructor;
+import openkino.com.VO.CommentVO;
+import openkino.com.exceptions.ResponseException;
+import openkino.com.form.CommentForm;
 import openkino.com.jpa.CommentDao;
 import openkino.com.jpa.FilmDao;
+import openkino.com.jpa.KinoUserDao;
 import openkino.com.models.Comment;
 import openkino.com.models.KinoUser;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-@Transactional
+@AllArgsConstructor
 public class CommentServiceImpl implements CommentService {
-
-    private FilmDao filmDao;
-    private CommentDao commentDao;
-
-    public CommentServiceImpl(FilmDao filmDao, CommentDao commentDao) {
-        this.filmDao = filmDao;
-        this.commentDao = commentDao;
-    }
-
-    @Override
-    public Long addComment(KinoUser kinoUser, Comment comment, Long id_film) {
-        return commentDao.save(comment).getId();
-    }
+    private final CommentDao commentDao;
+    private final FilmDao filmDao;
+    private final KinoUserDao kinoUserDao;
 
 
     @Override
+    @Transactional
+    public Long addComment(KinoUser kinoUser, CommentForm comment) {
+        KinoUser user = null;
+        if (kinoUser != null)
+            if (kinoUser.getMail() != null)
+                user = kinoUserDao.findByMale(kinoUser.getMail());
+        return commentDao.save(comment.toComment(user,filmDao)).getId();
+    }
+
+    @Override
+    @Transactional
     public void deleteComment(Long id_comment) {
-        commentDao.deleteById(id_comment);
+        Comment comment = commentDao.findById(id_comment)
+                .orElseThrow(()-> new ResponseException(HttpStatus.BAD_REQUEST,"Коментраий не найден ID: " + id_comment));
+        commentDao.delete(comment);
     }
 
     @Override
-    public Long updateComment(Comment comment) {
-        Comment comment1 = commentDao.findById(comment.getId()).get();
-        comment1.setDateTime(LocalDateTime.now(ZoneId.of("UTC+4")));
-        comment1.setComment(comment.getComment());
-        return commentDao.save(comment1).getId();
+    @Transactional
+    public Long updateComment(CommentForm commentForm) {
+        Comment comment = commentDao.findById(commentForm.getId())
+                .orElseThrow(()-> new ResponseException(HttpStatus.BAD_REQUEST,"Коментраий не найден ID: " + commentForm.getId()));
+        return commentForm.update(comment,filmDao).getId();
     }
 
     @Override
-    public List<Comment> getComments(Long id_film) {
-        List<Comment> commentList = commentDao.findAllByFilmId(id_film);
-        return commentList;
+    @Transactional(readOnly = true)
+    public List<CommentVO> getComments(Long filmId) {
+        return commentDao.findAllByFilmId(filmId)
+                .stream()
+                .map(CommentVO::new)
+                .collect(Collectors.toList());
     }
 }

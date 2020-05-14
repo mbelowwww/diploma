@@ -1,12 +1,18 @@
 package openkino.com.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import lombok.AllArgsConstructor;
+import openkino.com.VO.CommentVO;
+import openkino.com.form.CommentForm;
 import openkino.com.form.ImageSaveForm;
 import openkino.com.models.Film;
 import openkino.com.models.Genre;
+import openkino.com.models.KinoUser;
 import openkino.com.models.LimitAge;
+import openkino.com.service.CommentService;
 import openkino.com.service.FilmService;
 import openkino.com.view.Views;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -14,12 +20,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/film")
+@AllArgsConstructor
 public class FilmController {
     private final FilmService filmService;
-
-    public FilmController(FilmService filmService) {
-        this.filmService = filmService;
-    }
+    private final CommentService commentService;
 
     @PostMapping("")
     public Long saveFilm(@RequestBody Film film) {
@@ -90,4 +94,24 @@ public class FilmController {
         filmService.deleteImage(id);
     }
 
+    @PostMapping("/comment")
+    public Long saveComment(@RequestBody CommentForm commentForm, @AuthenticationPrincipal KinoUser kinoUser){
+        return commentService.addComment(kinoUser,commentForm);
+    }
+
+    @PutMapping("/comment")
+    public Long updateComment(@RequestBody CommentForm commentForm){
+        return commentService.updateComment(commentForm);
+    }
+
+    @JsonView(Views.Public.class)
+    @GetMapping("/comment/{filmId}")
+    public List<CommentVO> findAllCommentByFilmId(@PathVariable Long filmId){
+        return commentService.getComments(filmId);
+    }
+
+    @DeleteMapping("/comment/{id}")
+    public void deleteComment(@PathVariable Long id){
+        commentService.deleteComment(id);
+    }
 }

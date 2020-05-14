@@ -21,6 +21,8 @@ public interface KinoUserService extends UserDetailsService {
     KinoUser findKinoUserByMail(String mail);
 
     List<KinoUser> findByName(String fname, String name, String lname, String mail);
+
+    KinoUser findByAuth(KinoUser kinoUser);
 }
 
 

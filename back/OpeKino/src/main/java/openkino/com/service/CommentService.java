@@ -1,16 +1,17 @@
 package openkino.com.service;
 
-import openkino.com.models.Comment;
+import openkino.com.VO.CommentVO;
+import openkino.com.form.CommentForm;
 import openkino.com.models.KinoUser;
 
 import java.util.List;
 
 public interface CommentService {
-    Long addComment(KinoUser kinoUser, Comment comment, Long id_film);
+    Long addComment(KinoUser kinoUser, CommentForm comment);
 
     void deleteComment(Long id_comment);
 
-    Long updateComment(Comment comment);
+    Long updateComment(CommentForm comment);
 
-    List<Comment> getComments(Long id_film);
+    List<CommentVO> getComments(Long filmId);
 }

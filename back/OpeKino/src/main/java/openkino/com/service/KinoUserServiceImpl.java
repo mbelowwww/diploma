@@ -45,9 +45,9 @@ public class KinoUserServiceImpl implements KinoUserService {
     @Override
     public Long updateKinoUser(KinoUser kinoUser) {
         KinoUser kinoUser1 = kinoUserDao.findById(kinoUser.getId()).get();
-        if (kinoUser.getLName() != null) kinoUser1.setlName(kinoUser.getlName());
+        if (kinoUser.getLName() != null) kinoUser1.setLName(kinoUser.getLName());
         if (kinoUser.getName() != null) kinoUser1.setName(kinoUser.getName());
-        if (kinoUser.getfName() != null) kinoUser1.setfName(kinoUser.getfName());
+        if (kinoUser.getFName() != null) kinoUser1.setFName(kinoUser.getFName());
         if (kinoUser.getAge() != null) kinoUser1.setAge(kinoUser.getAge());
         if (kinoUser.getMail() != null) kinoUser1.setMail(kinoUser.getMail());
         if (kinoUser.getPhone() != null) kinoUser1.setPhone(kinoUser.getPhone());
@@ -81,5 +81,10 @@ public class KinoUserServiceImpl implements KinoUserService {
     public List<KinoUser> findByName(String fname, String name, String lname, String mail) {
         if (fname == null & name == null && lname == null && mail == null) return null;
         return kinoUserDao.findByName(fname, name, lname, mail);
+    }
+
+    @Override
+    public KinoUser findByAuth(KinoUser kinoUser) {
+        return kinoUserDao.findByMale(kinoUser.getMail());
     }
 }

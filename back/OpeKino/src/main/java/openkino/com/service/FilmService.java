@@ -1,14 +1,16 @@
 package openkino.com.service;
 
 import openkino.com.form.ImageSaveForm;
-import openkino.com.models.*;
+import openkino.com.models.Film;
+import openkino.com.models.Genre;
+import openkino.com.models.Image;
+import openkino.com.models.LimitAge;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
 
 public interface FilmService {
-
     Long saveFilm(Film film);
 
     void deleteFilmById(Long id);
@@ -21,7 +23,6 @@ public interface FilmService {
                                String genre,
                                Double rating,
                                Integer age);
-
 
     List<Film> getAllFilms();
 
