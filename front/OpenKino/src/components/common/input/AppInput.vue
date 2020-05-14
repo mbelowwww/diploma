@@ -10,6 +10,7 @@
            :value="value"
            :placeholder="placeholder"
            :class="[classProp ? classProp : '']"
+           :style="setSizeInput"
            class="container__input"
            @input="$emit('input', $event.target.value)"
     />
@@ -42,6 +43,15 @@ export default {
     classProp: {
       type: String,
       default: ''
+    },
+    inputSize: {
+      type: String,
+      default: ''
+    }
+  },
+  computed: {
+    setSizeInput () {
+      return `min-width: ${this.inputSize}px`
     }
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <div :class="{container: !isAdmin}">
+  <div :class="{'container': !isAdmin}">
     <AppCenter :isVertical="true" v-if="!isAdmin">
       <TheHeader/>
       <router-view></router-view>
@@ -35,10 +35,18 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
   height: 100vh;
   width: 100vw;
   background: url('assets/img/bg.png');
 }
+</style>
+
+<style lang="scss">
+  .container {
+    color: white;
+    padding: 0;
+    margin: 0;
+  }
 </style>
