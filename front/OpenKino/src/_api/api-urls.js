@@ -10,17 +10,23 @@ const films = {
 const ban = {
   TO_BAN: 'ban'
 }
+const halls = {
+  CREATE_HALL: 'hall',
+  GET_ALL_HALLS: 'hall/all'
+}
 
 const url = {
   auth,
   films,
-  ban
+  ban,
+  halls
 }
 
 export {
   auth,
   films,
-  ban
+  ban,
+  halls
 }
 
 export default url

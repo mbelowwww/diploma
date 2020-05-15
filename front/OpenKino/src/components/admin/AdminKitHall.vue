@@ -1,7 +1,7 @@
 <template>
-  <div class="container-kit-hall">
+  <div class="container-kit-halls">
     <div v-for="(item, index) in places" :key="index">
-      <div class="place" v-for="(item2, index2) in item" :key="index2" @click="getPlace(index, index2)"></div>
+      <div class="place" v-for="(item2, index2) in item" :key="index2" :class="{'green' : !!checkedPlaces.find(val => val === item2)}" @click="$emit('clickPlace', item2)"></div>
     </div>
 
   </div>
@@ -15,6 +15,10 @@ export default {
     places: {
       type: Array,
       default: () => []
+    },
+    checkedPlaces: {
+      type: Array,
+      default: () => []
     }
   },
   data () {
@@ -22,19 +26,18 @@ export default {
     }
   },
   methods: {
-    getPlace (i, j) {
-      // console.log('x: ', i, 'y: ', j)
-    }
   }
 }
 </script>
 
 <style scoped lang="scss">
-.container-kit-hall {
+.container-kit-halls {
   background: #f3f3f3;
-  height: 500px;
-  width: 800px;
+  min-height: 500px;
+  max-height: 500px;
+  max-width: 800px;
   display: flex;
+  overflow: auto;
 }
 .place {
   width: 20px;
@@ -42,4 +45,7 @@ export default {
   background: #16803c;
   margin: 5px;
 }
+  .green {
+    background: #000;
+  }
 </style>
