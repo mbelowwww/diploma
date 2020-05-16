@@ -35,7 +35,7 @@ export default {
   background: #f3f3f3;
   min-height: 500px;
   max-height: 500px;
-  max-width: 800px;
+  max-width: 1000px;
   display: flex;
   overflow: auto;
 }

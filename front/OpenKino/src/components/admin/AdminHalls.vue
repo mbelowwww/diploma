@@ -151,7 +151,7 @@ export default {
     width: 100%;
     height: 40px;
     padding: 10px;
-    background: #3EB1FF;
+    background: #92f7ff;
     color: #222222;
     border: none;
     border-radius: 3px;
