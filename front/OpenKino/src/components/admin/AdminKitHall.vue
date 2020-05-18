@@ -1,7 +1,7 @@
 <template>
   <div class="container-kit-halls">
     <div v-for="(item, index) in places" :key="index">
-      <div class="place" v-for="(item2, index2) in item" :key="index2" :class="{'green' : !!checkedPlaces.find(val => val === item2)}" @click="$emit('clickPlace', item2)"></div>
+      <div class="place" v-for="(item2, index2) in item" :key="index2" :class="{'actionPlace' : !!checkedPlaces.find(val => val === item2)}" @click="$emit('clickPlace', item2)"></div>
     </div>
 
   </div>
@@ -42,10 +42,10 @@ export default {
 .place {
   width: 20px;
   height: 20px;
-  background: #16803c;
+  background: #f3f3f3;
   margin: 5px;
 }
-  .green {
-    background: #000;
+  .actionPlace {
+    background: green;
   }
 </style>

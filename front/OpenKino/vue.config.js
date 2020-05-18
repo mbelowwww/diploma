@@ -10,6 +10,7 @@ module.exports = {
           @import "@/assets/style/variables.scss";
           @import "@/assets/style/clearfix.scss";
           @import "@/assets/style/mixins.scss";
+          @import "@/assets/style/stylesForComponents/button.scss";
           `
       }
     }

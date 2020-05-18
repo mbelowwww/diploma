@@ -9,11 +9,11 @@
         <AppInput v-model.number="dataWidthAndHeight.width" placeholder="Введите ширину зала" inputSize="200" class="container-halls__head__amount"/>
         <AppInput v-model.number="dataWidthAndHeight.height" placeholder="Введите высоту зала" inputSize="200" class="container-halls__head__amount"/>
         <AppInput v-model.number="dataWidthAndHeight.number" placeholder="Введите номер зала" inputSize="200" class="container-halls__head__amount"/>
-        <button class="single-button" @click="toCreatePlaces(dataWidthAndHeight.width, dataWidthAndHeight.height)">Сформировать</button>
+        <button class="btn-primary" @click="toCreatePlaces(dataWidthAndHeight.width, dataWidthAndHeight.height)">Сформировать</button>
       </div>
       <AdminKitHall :places="createdArray" :checkedPlaces="listPlaces" @clickPlace="addPlace"/>
       <div class="container-halls__create-halls__footer">
-        <button class="single-button" :disabled="listPlaces.length === 0 || dataWidthAndHeight.number === ''" @click="saveHall">Сохранить</button>
+        <button class="btn-primary" :disabled="listPlaces.length === 0 || dataWidthAndHeight.number === ''" @click="saveHall">Сохранить</button>
       </div>
     </div>
   </div>
@@ -49,6 +49,7 @@ export default {
           }
         }
       }
+      this.listPlaces = [].concat(...this.createdArray)
     },
     addPlace (value) {
       const oldIndex = this.listPlaces.indexOf(value)
@@ -78,20 +79,6 @@ export default {
         this.$store.dispatch('halls/getListHalls').then(response => this.listAllHalls = response)
       }
     }
-    // dataWidthAndHeight: {
-    //   deep: true,
-    //   immediate: true,
-    //   handler (val) {
-    //     if (val.height && val.width) {
-    //       for (let i = 0; i < val.width; i++) {
-    //         this.$set(this.createdArray, i, [])
-    //         for (let j = 0; j < val.height; j++) {
-    //           this.$set(this.createdArray[i], j, { x: j + 1, y: i + 1 })
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
   }
 }
 </script>
@@ -147,20 +134,5 @@ export default {
       }
     }
   }
-  .single-button {
-    width: 100%;
-    height: 40px;
-    padding: 10px;
-    background: #92f7ff;
-    color: #222222;
-    border: none;
-    border-radius: 3px;
-    font-size: 18px;
-    margin: 15px 0 0 0;
-    &:hover {
-      cursor: pointer;
-      background: #0E649E;
-      color: white;
-    }
-  }
+
 </style>

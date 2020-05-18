@@ -26,7 +26,7 @@
 
     </AppList>
 
-    <button class="single-button" @click="addFilm">
+    <button class="btn-primary" @click="addFilm">
       Добавить фильм
     </button>
     <!--popup Add Film-->
@@ -41,7 +41,7 @@
         <AppSelect v-model="dataFilm.typeFilm" :values="listType" :placeholder="inputConfig.inputFilmType.placeholder" classContainer="search__list"/>
         <AppSelect v-model="dataFilm.limitAge" :values="listAge" :placeholder="inputConfig.inputFilmAge.placeholder" classContainer="search__list"/>
 
-        <button class="single-button" @click="saveFilm">Сохранить</button>
+        <button class="btn-primary" @click="saveFilm">Сохранить</button>
       </div>
     </AppPopupWindow>
     <!--popup Change Film -->
@@ -55,7 +55,7 @@
         <AppSelect v-model="selectedFilm.typeFilm" :values="listType" :placeholder="inputConfig.inputFilmType.placeholder" classContainer="search__list"/>
         <AppSelect v-model="selectedFilm.limitAge" :values="listAge" :placeholder="inputConfig.inputFilmAge.placeholder" classContainer="search__list"/>
 
-        <button class="single-button" @click="changeFilm">Изменить</button>
+        <button class="btn-primary" @click="changeFilm">Изменить</button>
       </div>
     </AppPopupWindow>
   </div>
@@ -253,22 +253,6 @@ export default {
   }
 .container-films {
   color: #222222;
-}
-.single-button {
-  width: 180px;
-  min-height: 40px;
-  padding: 10px;
-  background: #3EB1FF;
-  color: #222222;
-  border: none;
-  border-radius: 3px;
-  font-size: 18px;
-  margin: 40px 0;
-  &:hover {
-    cursor: pointer;
-    background: #0E649E;
-    color: white;
-  }
 }
 
 .popup-admin-film {

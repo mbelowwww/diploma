@@ -26,7 +26,7 @@
         <p class="popup-admin-ban__text">Вы решили заблокировать: {{ selectedUser | getFIO }}</p>
         <p class="popup-admin-ban__text popup-admin-ban__default">Введите причину блокировки:</p>
         <AppInput v-model="reasonBan" placeholder="Введите причину" classProp="container__input-line"/>
-        <button class="single-button" @click="toBanUser(selectedUser)">Заблокировать</button>
+        <button class="btn-primary" @click="toBanUser(selectedUser)">Заблокировать</button>
       </div>
     </AppPopupWindow>
 
@@ -34,7 +34,7 @@
       <div class="wrapper-popup-change">
         <TheRegistration :dataRegistration="selectedUser" @changeUser="selectedUser = $event">
           <template #button>
-            <button class="single-button" @click="changeUser(selectedUser)">Изменить</button>
+            <button class="btn-primary" @click="changeUser(selectedUser)">Изменить</button>
           </template>
         </TheRegistration>
       </div>
@@ -189,22 +189,6 @@ export default {
   }
   &__default {
     color: #222222;
-  }
-}
-.single-button {
-  width: 180px;
-  min-height: 40px;
-  padding: 10px;
-  background: #3EB1FF;
-  color: #222222;
-  border: none;
-  border-radius: 3px;
-  font-size: 18px;
-  margin: 40px 0;
-  &:hover {
-    cursor: pointer;
-    background: #0E649E;
-    color: white;
   }
 }
 .wrapper-popup-change {
