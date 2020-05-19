@@ -4,6 +4,7 @@ import auth from '../store/modules/authorization.js'
 import films from '../store/modules/films'
 import ban from '../store/modules/ban'
 import halls from '../store/modules/halls'
+import sessions from '../store/modules/sessions'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -14,6 +15,6 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
-    auth, films, ban, halls
+    auth, films, ban, halls, sessions
   }
 })

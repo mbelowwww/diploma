@@ -11,8 +11,9 @@
       <AdminFilms v-if="selected.key === 1"/>
       <AdminSessions v-if="selected.key === 2"/>
       <AdminUsers v-if="selected.key === 3"/>
+      <AdminHalls v-if="selected.key === 4" style="margin-left: -100px"/>
     </AppCenter>
-    <AdminHalls v-if="selected.key === 4"/>
+
   </div>
 </template>
 

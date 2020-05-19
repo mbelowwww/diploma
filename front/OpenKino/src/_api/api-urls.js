@@ -14,19 +14,25 @@ const halls = {
   CREATE_HALL: 'hall',
   GET_ALL_HALLS: 'hall/all'
 }
+const sessions = {
+  CREATE_SESSIONS: 'session',
+  LIST_TYPES: 'session/type'
+}
 
 const url = {
   auth,
   films,
   ban,
-  halls
+  halls,
+  sessions
 }
 
 export {
   auth,
   films,
   ban,
-  halls
+  halls,
+  sessions
 }
 
 export default url

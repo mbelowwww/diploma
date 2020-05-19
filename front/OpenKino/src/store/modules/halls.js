@@ -19,6 +19,15 @@ const hallsModule = {
       return request().get(halls.GET_ALL_HALLS).then((response) => {
         return response.data
       })
+    },
+    getHallById (_, id) {
+      return request().get(halls.CREATE_HALL, {
+        params: {
+          idHall: id
+        }
+      }).then((response) => {
+        return response.data
+      })
     }
   }
 }

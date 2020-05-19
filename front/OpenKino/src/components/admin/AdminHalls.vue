@@ -2,7 +2,7 @@
   <div class="container-halls">
     <div class="container-halls__list-halls">
       <p class="container-halls__list-halls__text">Список залов:</p>
-      <li v-for="item in listAllHalls" :key="item.id" class="container-halls__list-halls__item">{{item.number}}</li>
+      <li v-for="item in listAllHalls" :key="item.id" class="container-halls__list-halls__item" @click="showHallItem(item.id)">{{item.number}}</li>
     </div>
     <div class="container-halls__create-halls">
       <div class="container-halls__head">
@@ -60,7 +60,7 @@ export default {
       }
     },
     saveHall () {
-      let correctData = {
+      const correctData = {
         width: this.dataWidthAndHeight.width,
         height: this.dataWidthAndHeight.height,
         number: this.dataWidthAndHeight.number,
@@ -69,6 +69,12 @@ export default {
       }
       this.$store.dispatch('halls/createHall', correctData).then(() => {
         this.$store.dispatch('halls/getListHalls').then(response => this.listAllHalls = response)
+      })
+    },
+    showHallItem (id) {
+      this.$store.dispatch('halls/getHallById', id).then((response) => {
+        this.toCreatePlaces(response.width, response.height)
+        this.listPlaces = response.places
       })
     }
   },
@@ -126,8 +132,6 @@ export default {
     &__create-halls {
       &__footer {
         height: 59px;
-        width: 100%;
-        max-width: 1000px;
         display: flex;
         justify-content: flex-end;
         align-items: flex-end;

@@ -1,5 +1,8 @@
 <template>
-  <div class="wrapper-buttons" :class="{'wrapper-buttons__vertical' : direction === 'vertical'}">
+  <div class="wrapper-buttons" :class="{
+    'wrapper-buttons__vertical' : direction === 'vertical',
+    'wrapper-buttons__between' : isBetween
+    }">
     <button v-for="(button, index) in buttons"
             :key="index"
             :class="[{'button-active' : selected === button || (selected && selected.key === button.key)},
@@ -30,6 +33,10 @@ export default {
       type: String,
       default: '',
       require: false
+    },
+    isBetween: {
+      type: Boolean,
+      default: false
     }
   },
   date () {
@@ -51,6 +58,9 @@ export default {
     display: flex;
     &__vertical {
       flex-direction: column;
+    }
+    &__between {
+      justify-content: space-between;
     }
   }
   .button_default {
@@ -84,5 +94,22 @@ export default {
     color: #0E649E;
     font-size: 18px;
     text-decoration: underline;
+  }
+  .btn-primary {
+    width: 100%;
+    max-width: 200px;
+    height: 40px;
+    padding: 10px;
+    background: #5eaaff;
+    color: #222222;
+    border: none;
+    border-radius: 3px;
+    font-size: 18px;
+    margin: 15px 0 0 0;
+    &:hover {
+      cursor: pointer;
+      background: #0E649E;
+      color: white;
+    }
   }
 </style>
