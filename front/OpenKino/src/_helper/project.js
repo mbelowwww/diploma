@@ -22,6 +22,13 @@ function dateToString (date) {
   const seconds = correctDate.getSeconds()
   return `${day < 10 ? '0' : ''}${day}.${month < 10 ? '0' : ''}${month}.${year} ${hours < 10 ? '0' : ''}${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
 }
+
+function serverDateApi (dateStr) {
+  if (!dateStr) { return null }
+  const parts = dateStr.split('.').map((item) => parseInt(item, 10))
+  return new Date(parts[2], parts[1] - 1, parts[0])
+}
+
 export {
-  keyToValue, dateToString
+  keyToValue, dateToString, serverDateApi
 }

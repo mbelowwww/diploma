@@ -6,7 +6,7 @@
     <AppButton :buttons="buttons" :selected="selected" @click="selectedButton($event)"/>
     <div class="header__user" @click="entryUser">
       <img src="@/assets/img/enter.png" class="header__user__enter" height="38px" width="38px" alt="login">
-      <span>{{userLogin}}</span>
+      <span>{{showCurrentUser}}</span>
     </div>
     <AppPopupWindow v-if="isWindowAuthorization" @close="isWindowAuthorization = false">
       <AppAuthorization/>
@@ -56,6 +56,12 @@ export default {
       selected: '',
       userLogin: 'Вход',
       isWindowAuthorization: false
+    }
+  },
+  computed: {
+    showCurrentUser () {
+      const userInfo = JSON.parse(localStorage.getItem('currentUser'))
+      return userInfo && userInfo.name ? userInfo.name : 'Вход'
     }
   },
   methods: {

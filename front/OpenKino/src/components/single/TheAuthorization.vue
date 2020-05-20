@@ -40,7 +40,9 @@ export default {
   },
   methods: {
     entryUser (value) {
-      this.$store.dispatch('auth/userAuthorization', value)
+      this.$store.dispatch('auth/userAuthorization', value).then(() => {
+        this.$store.dispatch('auth/getCurrentUser')
+      })
     },
     registrationUser (value) {
       this.$store.dispatch('auth/userRegistration', value)

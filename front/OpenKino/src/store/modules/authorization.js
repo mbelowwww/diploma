@@ -4,10 +4,12 @@ import request from '../../_api/api-headers'
 const authorationModule = {
   namespaced: true,
   state: {
-
+    currentUser: {}
   },
   mutations: {
-
+    setCurrentUser (state, data) {
+      state.currentUser = data
+    }
   },
   actions: {
     userRegistration (_, data) {
@@ -30,6 +32,12 @@ const authorationModule = {
     changeUser (_, data) {
       return request().put(auth.REGISTRATION_USER, data).then((response) => {
         return response
+      })
+    },
+    getCurrentUser ({ commit }) {
+      return request().get(auth.REGISTRATION_USER).then((response) => {
+        commit('setCurrentUser', response.data)
+        localStorage.setItem('currentUser', JSON.stringify(response.data))
       })
     }
   }

@@ -23,7 +23,7 @@
     >
       <template #item="{item}">
         <slot name="option" :value="item">
-          {{item.val}}
+          {{item[inputKey]}}
         </slot>
       </template>
     </AppList>

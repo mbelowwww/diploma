@@ -12,6 +12,6 @@ export default {
 
 <style scoped lang="scss">
   .input-group {
-     display: flex;
+    display: flex;
    }
 </style>

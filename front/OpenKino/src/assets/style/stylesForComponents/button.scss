@@ -1,3 +1,11 @@
+.wrapper-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+.wrapper-btn-sb {
+  display: flex;
+  justify-content: space-between;
+}
 .btn-primary {
   width: 100%;
   max-width: 200px;
@@ -15,3 +23,4 @@
     color: white;
   }
 }
+

@@ -25,10 +25,12 @@
       </template>
 
     </AppList>
+    <div class="wrapper-btn">
+      <button class="btn-primary" @click="addFilm">
+        Добавить фильм
+      </button>
+    </div>
 
-    <button class="btn-primary" @click="addFilm">
-      Добавить фильм
-    </button>
     <!--popup Add Film-->
     <AppPopupWindow v-if="isAddFilm" @close="isAddFilm = false">
       <div class="popup-admin-film">
@@ -287,4 +289,5 @@ export default {
     letter-spacing: 1px;
   }
 }
+
 </style>

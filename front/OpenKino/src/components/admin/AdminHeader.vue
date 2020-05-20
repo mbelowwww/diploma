@@ -2,8 +2,8 @@
   <div class="container-header">
     <div class="container-header__block"></div>
     <div class="container-header__block">
-      <span class="container-header__block__title">Здравствуйте, {{nameAdmin ? nameAdmin : 'администратор'}}</span>
-      <img src="@/assets/img/exit.png" alt="exit" width="24px" height="21px" class="container-header__block__image" @click="$router.push({name: 'PageMaine'})">
+      <span class="container-header__block__title">Здравствуйте, {{showCurrentUser}}</span>
+      <img src="@/assets/img/exit.png" alt="exit" width="24px" title="Выход" height="21px" class="container-header__block__image" @click="$router.push({name: 'PageMaine'})">
     </div>
   </div>
 </template>
@@ -15,6 +15,12 @@ export default {
   data () {
     return {
       nameAdmin: ''
+    }
+  },
+  computed: {
+    showCurrentUser () {
+      const userInfo = JSON.parse(localStorage.getItem('currentUser'))
+      return userInfo && userInfo.name ? userInfo.name : 'администратор'
     }
   }
 }
@@ -33,6 +39,7 @@ export default {
     align-items: center;
     &__image {
       margin: 0 30px;
+      cursor: pointer;
     }
     &__title {
       font-size: 24px;

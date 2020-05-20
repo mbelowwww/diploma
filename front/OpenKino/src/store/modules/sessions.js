@@ -13,11 +13,12 @@ const sessionsModule = {
   },
   actions: {
     createSession (_, data) {
-      return request().post(sessions, data)
+      return request().post(sessions.CREATE_SESSIONS, data)
     },
     getListTypes ({ commit }) {
       return request().get(sessions.LIST_TYPES).then((response) => {
         commit('setListTypes', response.data)
+        return response.data
       })
     },
     addType (_, data) {

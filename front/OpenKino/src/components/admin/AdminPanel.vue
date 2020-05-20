@@ -38,6 +38,7 @@ export default {
   flex-direction: row;
   font-size: 18px;
   justify-content: center;
+  letter-spacing: 1px;
   &__menu {
     width: 150px;
     height: 70px;
