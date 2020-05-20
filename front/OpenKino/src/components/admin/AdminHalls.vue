@@ -11,9 +11,9 @@
         <AppInput v-model.number="dataWidthAndHeight.number" placeholder="Введите номер зала" inputSize="200" class="container-halls__head__amount"/>
         <button class="btn-primary" @click="toCreatePlaces(dataWidthAndHeight.width, dataWidthAndHeight.height)">Сформировать</button>
       </div>
-      <AdminKitHall :places="createdArray" :checkedPlaces="listPlaces" @clickPlace="addPlace"/>
+      <AdminKitHall v-if="listPlaces.length > 0" :places="createdArray" :checkedPlaces="listPlaces" @clickPlace="addPlace"/>
       <div class="container-halls__create-halls__footer">
-        <button class="btn-primary" :disabled="listPlaces.length === 0 || dataWidthAndHeight.number === ''" @click="saveHall">Сохранить</button>
+        <button v-if="listPlaces.length > 0" class="btn-primary" :disabled="listPlaces.length === 0 || dataWidthAndHeight.number === ''" @click="saveHall">Сохранить</button>
       </div>
     </div>
   </div>
@@ -52,7 +52,8 @@ export default {
       this.listPlaces = [].concat(...this.createdArray)
     },
     addPlace (value) {
-      const oldIndex = this.listPlaces.indexOf(value)
+      // const oldIndex = this.listPlaces.indexOf(value)
+      const oldIndex = this.listPlaces.findIndex(item => item.x === value.x && item.y === value.y)
       if (oldIndex === -1) {
         this.listPlaces.push(value)
       } else {
@@ -101,7 +102,7 @@ export default {
       flex-direction: column;
       background: #f1f1f1;
       height: 100%;
-      min-height: calc(100vh - 330px);
+      min-height: calc(100vh - 250px);
       margin-right: 10px;
       &__text {
         font-size: 22px;

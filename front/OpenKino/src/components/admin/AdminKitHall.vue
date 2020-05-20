@@ -33,17 +33,19 @@ export default {
 <style scoped lang="scss">
 .container-kit-halls {
   background: #f3f3f3;
-  min-height: 500px;
   max-height: 500px;
+  max-width: 807px;
   display: flex;
   overflow: auto;
 }
 .place {
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   /*background: #f3f3f3;*/
-  background: yellow;
+  background: #f3f3f3;
+  border-radius: 2px;
   margin: 5px;
+  border: 1px solid #5eaaff;
 }
   .actionPlace {
     background: green;

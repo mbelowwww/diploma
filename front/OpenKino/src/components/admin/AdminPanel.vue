@@ -31,15 +31,16 @@ export default {
 <style scoped lang="scss">
 .container-panel {
   background: #222222;
-  height: 150px;
+  height: 70px;
   width: 100%;
   padding: 0 50px;
   display: flex;
   flex-direction: row;
-  font-size: 36px;
+  font-size: 18px;
+  justify-content: center;
   &__menu {
-    width: 250px;
-    height: 150px;
+    width: 150px;
+    height: 70px;
     border: 1px solid white;
     display: flex;
     justify-content: center;
@@ -50,6 +51,7 @@ export default {
     background: white;
     color: #222222;
     border: 1px solid #222222;
+    /*outline: 1px solid #222222;*/
   }
 }
 </style>
