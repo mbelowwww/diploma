@@ -3,17 +3,33 @@
     <AppInputGroup #group>
       <AppSearch v-model="searchSession" placeholder="Поиск по фильму"/>
       <AppDatePicker v-model="startSession" :inputConf="dateStart" style="margin: 15px 20px 0"/>
-      <AppDatePicker v-model="endSession" :inputConf="dateEnd" style="margin: 15px 0 0 0"/>
+      <AppDatePicker v-model="endSession" :inputConf="dateEnd" style="margin: 15px 20px 0 0"/>
+      <button class="btn-primary" @click="isAddSession = true">Добавить сеанс</button>
     </AppInputGroup>
+    <div class="wrapper-films__header">
+      <div v-for="item in listFilmHeader" :key="item.id" :style="getLengthRow" class="wrapper-films__header__item">{{item.name}}</div>
+    </div>
+    <AppList :list="listSession">
+      <template #item="{item, index}">
+        <div class="wrapper-films">
+          <div class="wrapper-films__data" :style="getLengthRow">{{index + 1}}</div>
+          <div class="wrapper-films__data" :style="getLengthRow">{{item.film.name ? item.film.name : 'Не введено'}}</div>
+          <div class="wrapper-films__data" :style="getLengthRow">{{item.hall.name ? item.hall.name : 'Не введено'}}</div>
+          <div class="wrapper-films__data" :style="getLengthRow">{{item.typeSession ? item.typeSession.name : ''}}</div>
+          <div class="wrapper-films__data" :style="getLengthRow">{{item.end}}</div>
+          <div class="wrapper-films__data" :style="getLengthRow">{{item.film.limitAge.age ? item.film.limitAge.age : 'Не введено'}}</div>
+<!--          <div class="wrapper-films__data" :style="getLengthRow">-->
+<!--            <img src="@/assets/img/change.png" height="20px" width="20px" alt="change" @click="isShowPanelChangeFilm = true, selectedFilm = item">-->
+<!--          </div>-->
+<!--          <div class="wrapper-films__data" :style="getLengthRow">-->
+<!--            <img src="@/assets/img/delete.png" height="20px" width="20px" alt="delete">-->
+<!--          </div>-->
+        </div>
+      </template>
 
-    <AppSelect v-model="createDataSession.type" inputKey="name" :values="listTypes" placeholder="Выберите тип фильма" classContainer="search__list"/>
-    <AppSelect v-model="createDataSession.film" inputKey="name" :values="listFilms" placeholder="Выберите фильм" classContainer="search__list"/>
-    <AppSelect v-model="createDataSession.hall" inputKey="number" :values="listHalls" placeholder="Выберите номер зала" classContainer="search__list" style="margin-bottom: 10px"/>
-    <AppInput v-model.number="createDataSession.price" placeholder="Введите цену" classProp="container__input-line"/>
-    <AppDatePicker v-model="createDataSession.time" :inputConf="createDate"/>
-    <div class="wrapper-btn-sb">
+    </AppList>
+    <div class="wrapper-btn-fs">
       <button class="btn-primary" @click="isAddType = true">Добавить тип</button>
-      <button class="btn-primary" @click="createSession(createDataSession)">Создать сеанс</button>
     </div>
 
     <transition name="slide-popup-add-type">
@@ -36,13 +52,19 @@
 
   <transition name="slide-popup-add-type">
     <AppPopupWindow v-if="isAddSession" @close="isAddSession = false">
-      <AppSelect v-model="createDataSession.type" inputKey="name" :values="listTypes" placeholder="Выберите тип фильма" classContainer="search__list"/>
-      <AppSelect v-model="createDataSession.film" inputKey="name" :values="listFilms" placeholder="Выберите фильм" classContainer="search__list"/>
-      <AppSelect v-model="createDataSession.hall" inputKey="number" :values="listHalls" placeholder="Выберите номер зала" classContainer="search__list" style="margin-bottom: 10px"/>
-      <AppInput v-model.number="createDataSession.price" placeholder="Введите цену" classProp="container__input-line"/>
-      <AppDatePicker v-model="createDataSession.time" :inputConf="createDate"/>
-      <div class="btn-primary">
-        <button class="btn-primary" @click="createSession(createDataSession)">Создать сеанс</button>
+      <div class="container-sessions__center">
+        <div>
+          <p class="container-sessions__center__title">Создать новый сеанс:</p>
+          <AppSelect v-model="createDataSession.type" inputKey="name" :values="listTypes" placeholder="Выберите тип фильма" classContainer="search__list"/>
+          <AppSelect v-model="createDataSession.film" inputKey="name" :values="listFilms" placeholder="Выберите фильм" classContainer="search__list"/>
+          <AppSelect v-model="createDataSession.hall" inputKey="number" :values="listHalls" placeholder="Выберите номер зала" classContainer="search__list" style="margin-bottom: 10px"/>
+          <AppInput v-model.number="createDataSession.price" placeholder="Введите цену" classProp="container__input-line"/>
+          <AppDatePicker v-model="createDataSession.time" :inputConf="createDate"/>
+        </div>
+        <div class="wrapper-btn">
+          <button class="btn-primary" @click="createSession(createDataSession)">Создать сеанс</button>
+        </div>
+
       </div>
     </AppPopupWindow>
   </transition>
@@ -59,10 +81,10 @@ import AppInputGroup from '../common/group/AppInputGroup'
 import AppDatePicker from '../common/input/AppDatePicker'
 import AppSelect from '../common/input/AppSelect'
 import { dateToString } from '../../_helper/project'
-
+import AppList from '../common/input/AppList'
 export default {
   name: 'AdminSessions',
-  components: { AppSelect, AppDatePicker, AppInputGroup, AppButton, AppInput, AppPopupWindow, AppSearch },
+  components: { AppSelect, AppDatePicker, AppInputGroup, AppButton, AppInput, AppPopupWindow, AppSearch, AppList },
   created () {
     this.$store.dispatch('sessions/getListTypes').then(response => this.listTypes = response)
     this.$store.dispatch('films/getFilm', '').then(response => this.listFilms = response)
@@ -90,8 +112,8 @@ export default {
         }
       ],
       selected: {},
-      startSession: '',
-      endSession: '',
+      startSession: new Date(2011, 0, 1, 0, 0, 0, 0),
+      endSession: new Date(),
       dateStart: {
         type: 'datetime',
         disabled: false,
@@ -113,7 +135,42 @@ export default {
         film: {},
         hall: {},
         price: ''
-      }
+      },
+      listFilmHeader: [
+        {
+          id: 1,
+          name: 'Номер'
+        },
+        {
+          id: 2,
+          name: 'Название фильма'
+        },
+        {
+          id: 3,
+          name: 'Номер зала'
+        },
+        {
+          id: 4,
+          name: 'Тип'
+        },
+        {
+          id: 5,
+          name: 'Дата'
+        },
+        {
+          id: 6,
+          name: 'Возрастное ограничение'
+        },
+        // {
+        //   id: 7,
+        //   name: 'Редактировать'
+        // },
+        // {
+        //   id: 8,
+        //   name: 'Удалить'
+        // }
+      ],
+      listSession: []
     }
   },
   methods: {
@@ -131,7 +188,6 @@ export default {
       }
     },
     createSession (value) {
-      console.log(value)
       let correctData = {
         price: this.createDataSession.price,
         idFilm: this.createDataSession.film.id,
@@ -145,6 +201,9 @@ export default {
   computed: {
     getListTypes () {
       return this.$store.state.sessions.listTypes
+    },
+    getLengthRow () {
+      return `width: ${995 / this.listFilmHeader.length}px`
     }
   },
   watch: {
@@ -152,6 +211,25 @@ export default {
       immediate: true,
       handler: function (val) {
         this.$store.dispatch('sessions/getListTypes')
+      }
+    },
+    startSession: {
+      immediate: true,
+      handler: function (val) {
+        const correctData = {
+          start: dateToString(this.startSession),
+          end: dateToString(this.endSession)
+        }
+        this.$store.dispatch('sessions/getListSessions', correctData).then(response => this.listSession = response.data)
+      }
+    },
+    endSession: {
+      handler: function (val) {
+        const correctData = {
+          start: dateToString(this.startSession),
+          end: dateToString(this.endSession)
+        }
+        this.$store.dispatch('sessions/getListSessions', correctData).then(response => this.listSession = response.data)
       }
     }
   }
@@ -186,7 +264,34 @@ export default {
       }
     }
   }
+  @mixin flexStyle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .wrapper-films {
+    display: flex;
 
+    &__header {
+      @include flexStyle;
+      margin-top: 10px;
+      color: black;
+      font-size: 18px;
+      font-weight: 700;
+      word-wrap: normal;
+      &__item {
+        @include flexStyle;
+      }
+    }
+    &__data {
+      @include flexStyle;
+      padding: 5px;
+      font-weight: 100;
+      font-size: 16px;
+      color: gray;
+      letter-spacing: 1px;
+    }
+  }
   .slide-popup-add-type-enter-active {
     transition: all .4s ease;
   }

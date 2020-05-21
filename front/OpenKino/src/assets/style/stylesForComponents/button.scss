@@ -6,6 +6,10 @@
   display: flex;
   justify-content: space-between;
 }
+.wrapper-btn-fs {
+  display: flex;
+  justify-content: flex-start;
+}
 .btn-primary {
   width: 100%;
   max-width: 200px;

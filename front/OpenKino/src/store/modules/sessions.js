@@ -23,6 +23,11 @@ const sessionsModule = {
     },
     addType (_, data) {
       return request().post(sessions.LIST_TYPES, data)
+    },
+    getListSessions (_, data) {
+      return request().put(sessions.LIST_SESSION_TIME, data).then((response) => {
+        return response
+      })
     }
   }
 }

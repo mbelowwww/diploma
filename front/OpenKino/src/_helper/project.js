@@ -14,7 +14,7 @@ function keyToValue (item, key) {
 
 function dateToString (date) {
   let correctDate = new Date(date)
-  const day = correctDate.getDay()
+  const day = correctDate.getDate()
   const month = correctDate.getMonth() + 1
   const year = correctDate.getFullYear()
   const hours = correctDate.getHours()

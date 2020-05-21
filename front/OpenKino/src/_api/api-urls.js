@@ -16,7 +16,8 @@ const halls = {
 }
 const sessions = {
   CREATE_SESSIONS: 'session',
-  LIST_TYPES: 'session/type'
+  LIST_TYPES: 'session/type',
+  LIST_SESSION_TIME: 'session/time'
 }
 
 const url = {

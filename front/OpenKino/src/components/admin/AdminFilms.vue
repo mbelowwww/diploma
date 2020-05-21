@@ -7,24 +7,24 @@
       <div v-for="item in listFilmHeader" :key="item.id" :style="getLengthRow" class="wrapper-films__header__item">{{item.name}}</div>
     </div>
     <AppList :list="listFilms">
-      <template #item="{item, index}">
-        <div class="wrapper-films">
-            <div class="wrapper-films__data" :style="getLengthRow">{{index + 1}}</div>
-            <div class="wrapper-films__data" :style="getLengthRow">{{item.name ? item.name : 'Не введено'}}</div>
-            <div class="wrapper-films__data" :style="getLengthRow">{{item.genre.name ? item.genre.name : 'Не введено'}}</div>
-            <div class="wrapper-films__data" :style="getLengthRow">{{item.rating ? item.rating : 'Не введено'}}</div>
-            <div class="wrapper-films__data" :style="getLengthRow">{{item.length ? (item.length / 3600).toFixed(1) : 'Не введено'}}</div>
-            <div class="wrapper-films__data" :style="getLengthRow">{{item.limitAge.age ? item.limitAge.age : 'Не введено'}}</div>
-            <div class="wrapper-films__data" :style="getLengthRow">
-              <img src="@/assets/img/change.png" height="20px" width="20px" alt="change" @click="isShowPanelChangeFilm = true, selectedFilm = item">
-            </div>
-            <div class="wrapper-films__data" :style="getLengthRow">
-              <img src="@/assets/img/delete.png" height="20px" width="20px" alt="delete" @click="deleteFilm(item)">
-            </div>
+    <template #item="{item, index}">
+      <div class="wrapper-films">
+        <div class="wrapper-films__data" :style="getLengthRow">{{index + 1}}</div>
+        <div class="wrapper-films__data" :style="getLengthRow">{{item.name ? item.name : 'Не введено'}}</div>
+        <div class="wrapper-films__data" :style="getLengthRow">{{item.genre.name ? item.genre.name : 'Не введено'}}</div>
+        <div class="wrapper-films__data" :style="getLengthRow">{{item.rating ? item.rating : 'Не введено'}}</div>
+        <div class="wrapper-films__data" :style="getLengthRow">{{item.length ? (item.length / 3600).toFixed(1) : 'Не введено'}}</div>
+        <div class="wrapper-films__data" :style="getLengthRow">{{item.limitAge.age ? item.limitAge.age : 'Не введено'}}</div>
+        <div class="wrapper-films__data" :style="getLengthRow">
+          <img src="@/assets/img/change.png" height="20px" width="20px" alt="change" @click="isShowPanelChangeFilm = true, selectedFilm = item">
         </div>
-      </template>
+        <div class="wrapper-films__data" :style="getLengthRow">
+          <img src="@/assets/img/delete.png" height="20px" width="20px" alt="delete" @click="deleteFilm(item)">
+        </div>
+      </div>
+    </template>
 
-    </AppList>
+  </AppList>
     <div class="wrapper-btn">
       <button class="btn-primary" @click="addFilm">
         Добавить фильм
