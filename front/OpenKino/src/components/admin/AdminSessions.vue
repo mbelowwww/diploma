@@ -61,11 +61,13 @@
           <AppInput v-model.number="createDataSession.price" placeholder="Введите цену" classProp="container__input-line"/>
           <AppDatePicker v-model="createDataSession.time" :inputConf="createDate"/>
         </div>
+
         <div class="wrapper-btn">
           <button class="btn-primary" @click="createSession(createDataSession)">Создать сеанс</button>
         </div>
 
       </div>
+
     </AppPopupWindow>
   </transition>
 
@@ -130,7 +132,7 @@ export default {
         placeholder: 'Дата сеанса'
       },
       createDataSession: {
-        time: '',
+        time: new Date(),
         type: {},
         film: {},
         hall: {},
@@ -195,7 +197,15 @@ export default {
         idTypeSession: this.createDataSession.type.id,
         start: dateToString(this.createDataSession.time)
       }
-      this.$store.dispatch('sessions/createSession', correctData)
+      this.$store.dispatch('sessions/createSession', correctData).then(() => {
+        const correctData = {
+          start: dateToString(this.startSession),
+          end: dateToString(this.endSession)
+        }
+        this.$store.dispatch('sessions/getListSessions', correctData).then(response => this.listSession = response.data).then(() => {
+          this.isAddSession = false
+        })
+      })
     }
   },
   computed: {
@@ -298,8 +308,7 @@ export default {
   .slide-popup-add-type-leave-active {
     transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
   }
-  .slide-popup-add-type-enter, .slide-popup-add-type-leave-to
-    /* .slide-fade-leave-active до версии 2.1.8 */ {
+  .slide-popup-add-type-enter, .slide-popup-add-type-leave-to {
     transform: translateX(10px);
     opacity: 0;
   }

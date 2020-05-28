@@ -3,7 +3,7 @@
     <AppCenter :isVertical="true" v-if="!isAdmin">
       <TheHeader/>
       <router-view></router-view>
-      <TheFooter/>
+<!--      <TheFooter/>-->
     </AppCenter>
 
     <Admin v-else/>
@@ -26,9 +26,15 @@ export default {
   },
   watch: {
     $route: {
-      // immediate: true,
       handler: function () {
         this.isAdmin = this.$route.path.includes('admin')
+      }
+    },
+    isAdmin: {
+      immediate: true,
+      handler: function () {
+        const userInfo = JSON.parse(localStorage.getItem('currentUser'))
+        if (userInfo && userInfo !== {}) this.$store.dispatch('auth/getCurrentUser')
       }
     }
   }

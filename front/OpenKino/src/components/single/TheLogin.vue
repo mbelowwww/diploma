@@ -1,7 +1,7 @@
 <template>
   <div class="container-login">
     <AppInput v-model="dataLogin.mail" :placeholder="inputConfig.mail.placeholder"/>
-    <AppInput v-model="dataLogin.password" :placeholder="inputConfig.password.placeholder"/>
+    <AppInput v-model="dataLogin.password" :placeholder="inputConfig.password.placeholder" type="password"/>
     <AppButton :selected="selected" :buttons="buttons" @click="selectedLogin" class="container-login__buttons"/>
   </div>
 </template>

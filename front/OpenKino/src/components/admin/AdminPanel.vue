@@ -52,6 +52,7 @@ export default {
     background: white;
     color: #222222;
     border: 1px solid #222222;
+    font-size: 20px;
     /*outline: 1px solid #222222;*/
   }
 }

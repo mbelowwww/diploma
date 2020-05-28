@@ -75,6 +75,9 @@ export default {
     showHallItem (id) {
       this.$store.dispatch('halls/getHallById', id).then((response) => {
         this.toCreatePlaces(response.width, response.height)
+        this.dataWidthAndHeight.width = response.width
+        this.dataWidthAndHeight.height = response.height
+        this.dataWidthAndHeight.number = response.number
         this.listPlaces = response.places
       })
     }

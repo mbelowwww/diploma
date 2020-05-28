@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="OpenKino.db" uuid="620b1fbd-56f8-4d88-8409-8e53b9eae736">
+      <driver-ref>h2.unified</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:C:\\Users\\Максим\\openKino\\database\\OpenKino.db;AUTO_SERVER=TRUE</jdbc-url>
+    </data-source>
+  </component>
+</project>

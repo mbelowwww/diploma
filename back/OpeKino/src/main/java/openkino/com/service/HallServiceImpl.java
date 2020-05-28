@@ -27,7 +27,8 @@ public class HallServiceImpl implements HallService {
     public Long save(HallForm hallForm) {
         Hall hall = new HallForm().toHall(hallForm);
         hallDao.save(hall);
-        List<Place> places = hallForm.getPlaces().stream()
+        List<Place> places = hallForm.getPlaces()
+                .stream()
                 .map(placeForm -> new PlaceForm().toPlace(placeForm, hall))
                 .collect(Collectors.toList());
         places.forEach(place -> savePlace(place));

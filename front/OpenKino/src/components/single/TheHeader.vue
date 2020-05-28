@@ -55,7 +55,8 @@ export default {
       ],
       selected: '',
       userLogin: 'Вход',
-      isWindowAuthorization: false
+      isWindowAuthorization: false,
+      isWindowPrimaryCabinet: false
     }
   },
   computed: {
@@ -70,7 +71,11 @@ export default {
       this.$router.push({ name: button.to })
     },
     entryUser (value) {
-      this.isWindowAuthorization = true
+      if (this.showCurrentUser === 'Вход') {
+        this.isWindowAuthorization = true
+      } else {
+        this.$router.push({ name: 'PageUserCabinet' })
+      }
     }
   }
 }
@@ -91,6 +96,7 @@ export default {
   &__user {
     display: flex;
     align-items: center;
+    cursor: pointer;
     &__enter {
       margin: 0 10px;
     }

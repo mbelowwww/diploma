@@ -38,6 +38,7 @@ const authorationModule = {
       return request().get(auth.REGISTRATION_USER).then((response) => {
         commit('setCurrentUser', response.data)
         localStorage.setItem('currentUser', JSON.stringify(response.data))
+        return response.data
       })
     }
   }

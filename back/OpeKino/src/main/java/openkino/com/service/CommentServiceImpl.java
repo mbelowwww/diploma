@@ -53,9 +53,9 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional(readOnly = true)
     public List<CommentVO> getComments(Long filmId) {
-        return commentDao.findAllByFilmId(filmId)
-                .stream()
+        return commentDao.findAllByFilmId(filmId).stream()
                 .map(CommentVO::new)
                 .collect(Collectors.toList());
     }
+
 }

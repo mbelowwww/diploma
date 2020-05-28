@@ -1,7 +1,13 @@
 <template>
   <div class="container-kit-halls">
     <div v-for="(item, index) in places" :key="index">
-      <div class="place" v-for="(item2, index2) in item" :key="index2" :class="{'actionPlace' : !!checkedPlaces.find(val => val.x === item2.x && val.y === item2.y)}" @click="$emit('clickPlace', item2)"></div>
+      <div v-for="(item2, index2) in item"
+           :key="index2"
+           class="place"
+           :class="{'actionPlace' : !!checkedPlaces.find(val => val.x === item2.x && val.y === item2.y)}"
+           @click="$emit('clickPlace', item2)"
+      >
+      </div>
     </div>
 
   </div>

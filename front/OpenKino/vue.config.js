@@ -11,6 +11,7 @@ module.exports = {
           @import "@/assets/style/clearfix.scss";
           @import "@/assets/style/mixins.scss";
           @import "@/assets/style/stylesForComponents/button.scss";
+          @import "@/assets/style/stylesForComponents/titleOfComponent.scss";
           `
       }
     }

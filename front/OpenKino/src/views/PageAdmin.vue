@@ -7,7 +7,7 @@
       @click="selected = $event"
     />
     <AdminShow :showItemMenu="selected"/>
-    <AppCenter :isVertical="true" :isAdmin="true">
+    <AppCenter :isVertical="true" maxWidth="1000">
       <AdminFilms v-if="selected.key === 1"/>
       <AdminSessions v-if="selected.key === 2"/>
       <AdminUsers v-if="selected.key === 3"/>

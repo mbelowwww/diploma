@@ -35,19 +35,29 @@ export default {
         class: '',
         key: '',
         val: ''
-      }
+      },
+      currentUser: {}
     }
   },
   methods: {
     entryUser (value) {
       this.$store.dispatch('auth/userAuthorization', value).then(() => {
-        this.$store.dispatch('auth/getCurrentUser')
+        this.$store.dispatch('auth/getCurrentUser').then(response => this.currentUser = response)
       })
     },
     registrationUser (value) {
       this.$store.dispatch('auth/userRegistration', value)
     }
-  }
+  },
+  // watch: {
+  //   currentUser: {
+  //     immediate: true,
+  //     handler: function () {
+  //       const userInfo = JSON.parse(localStorage.getItem('currentUser'))
+  //       if (userInfo && userInfo !== {}) this.$store.dispatch('auth/getCurrentUser').then(response => this.currentUser = response)
+  //     }
+  //   }
+  // }
 }
 </script>
 

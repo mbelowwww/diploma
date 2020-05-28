@@ -11,11 +11,27 @@
   justify-content: flex-start;
 }
 .btn-primary {
-  width: 100%;
-  max-width: 200px;
-  height: 40px;
+   width: 100%;
+   max-width: 200px;
+   height: 40px;
+   padding: 10px;
+   background: #5eaaff;
+   color: #222222;
+   border: none;
+   border-radius: 3px;
+   font-size: 18px;
+   margin: 15px 0 0 0;
+   &:hover {
+     cursor: pointer;
+     background: #0E649E;
+     color: white;
+   }
+ }
+.btn-cabinet {
+  width: 155px;
+  height: 66px;
   padding: 10px;
-  background: #5eaaff;
+  background: #F36D21;
   color: #222222;
   border: none;
   border-radius: 3px;
@@ -23,8 +39,6 @@
   margin: 15px 0 0 0;
   &:hover {
     cursor: pointer;
-    background: #0E649E;
-    color: white;
   }
 }
 

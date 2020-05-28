@@ -31,6 +31,14 @@ const routes = [
     meta: {
       isAdmin: true
     }
+  },
+  {
+    path: '/userCabinet',
+    name: 'PageUserCabinet',
+    component: () => import('../views/PageUserCabinet.vue'),
+    meta: {
+      isAdmin: true
+    }
   }
 ]
 
