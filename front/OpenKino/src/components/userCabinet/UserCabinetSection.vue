@@ -6,7 +6,7 @@
         <AppTable :header="headers" :array="array" headerValue="val"></AppTable>
       </div>
       <div class="container-item__data__block" style="display: flex; align-items: flex-end">
-        <button class="btn-cabinet">{{nameButton}}</button>
+        <button class="btn-cabinet" @click="$emit('clickBtn')">{{nameButton}}</button>
       </div>
     </div>
   </div>

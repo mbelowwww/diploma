@@ -4,10 +4,14 @@
       <div v-for="(item2, index2) in item"
            :key="index2"
            class="place"
-           :class="{'actionPlace' : !!checkedPlaces.find(val => val.x === item2.x && val.y === item2.y)}"
+           :class="{'actionPlace' : !!checkedPlaces.find(val => val.x === item2.x && val.y === item2.y),
+                    'reservationPlace' : !!reservationPlaces.find(val => val.x === item2.x && val.y === item2.y)}"
            @click="$emit('clickPlace', item2)"
       >
       </div>
+    </div>
+    <div class="wrapper-btn-clm">
+      <slot name="bottom"></slot>
     </div>
 
   </div>
@@ -23,6 +27,10 @@ export default {
       default: () => []
     },
     checkedPlaces: {
+      type: Array,
+      default: () => []
+    },
+    reservationPlaces: {
       type: Array,
       default: () => []
     }
@@ -48,12 +56,15 @@ export default {
   width: 28px;
   height: 28px;
   /*background: #f3f3f3;*/
-  background: #f3f3f3;
+
   border-radius: 2px;
   margin: 5px;
   border: 1px solid #5eaaff;
 }
   .actionPlace {
     background: green;
+  }
+  .reservationPlace {
+    background: #222222;
   }
 </style>

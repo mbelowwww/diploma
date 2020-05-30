@@ -76,8 +76,6 @@ export default {
   .sp-field {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
-    margin-bottom: 10px;
     max-width: 200px;
 
     &__label {
@@ -92,7 +90,7 @@ export default {
 
     &__input {
       border: 1px solid gray;
-      box-shadow: 3px 0 1px gray;
+      /*box-shadow: 3px 0 1px gray;*/
       background: white;
       &_error {
         box-shadow: 3px 0 0 red;

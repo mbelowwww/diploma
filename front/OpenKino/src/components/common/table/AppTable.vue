@@ -4,7 +4,7 @@
     <div class="container-table__header" >
       <div v-for="item in header" :key="item && item.id ? item.id : item.key" :style="widthRow" class="container-table__header__item">{{item[headerValue]}}</div>
     </div>
-    <div v-for="item in array" :key="item && item.id ? item.id : item.key" class="container-table__data">
+    <div v-for="item in array" :key="item && item.id ? item.id : item.key" class="container-table__data" @click="$emit('clickItem', item)">
       <div v-for="key in header" :key="key.id" :style="widthRow">
         <slot :name="key.value" :item="item">{{valueByKey(item, key.value)}}</slot>
       </div>
@@ -87,6 +87,8 @@ export default {
     }
     &__data {
       display: flex;
+      margin: 5px 0;
+      cursor: pointer;
     }
   }
 </style>

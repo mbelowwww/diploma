@@ -2,7 +2,7 @@ import { reservation } from '../../_api/api-urls'
 import request from '../../_api/api-headers'
 
 const reservationModule = {
-  namespaces: true,
+  namespaced: true,
   state: {
   },
   mutations: {
@@ -20,8 +20,12 @@ const reservationModule = {
         return response.data
       })
     },
-    getListPlacesById (_) {
-      return request().get(reservation.LIST_PLACES_BY_ID).then((response) => {
+    getListPlacesById (_, id) {
+      return request().get(reservation.LIST_PLACES_BY_ID, {
+        params: {
+          sessionId: id
+        }
+      }).then((response) => {
         return response.data
       })
     }

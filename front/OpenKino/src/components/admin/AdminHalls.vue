@@ -26,6 +26,9 @@ import AdminKitHall from './AdminKitHall'
 export default {
   name: 'AdminHalls',
   components: { AdminKitHall, AppInputGroup, AppInput },
+  created () {
+    this.$store.dispatch('halls/getListHalls').then(response => this.listAllHalls = response)
+  },
   data () {
     return {
       dataWidthAndHeight: {
@@ -45,7 +48,7 @@ export default {
         for (let i = 0; i < width; i++) {
           this.$set(this.createdArray, i, [])
           for (let j = 0; j < height; j++) {
-            this.$set(this.createdArray[i], j, { x: i + 1, y: j + 1 })
+            this.$set(this.createdArray[i], j, { x: i + 1, y: j + 1})
           }
         }
       }
@@ -82,14 +85,14 @@ export default {
       })
     }
   },
-  watch: {
-    getListHalls: {
-      immediate: true,
-      handler () {
-        this.$store.dispatch('halls/getListHalls').then(response => this.listAllHalls = response)
-      }
-    }
-  }
+  // watch: {
+  //   getListHalls: {
+  //     immediate: true,
+  //     handler () {
+  //       this.$store.dispatch('halls/getListHalls').then(response => this.listAllHalls = response)
+  //     }
+  //   }
+  // }
 }
 </script>
 

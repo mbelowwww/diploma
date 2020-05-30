@@ -9,7 +9,7 @@ const cabinetUserModule = {
   },
   actions: {
     addCard (_, data) {
-      return request().post(cabinetUser.ADD_CARD)
+      return request().post(cabinetUser.ADD_CARD, data)
     },
     getListCards ({ commit }) {
       return request().get(cabinetUser.LIST_CARDS).then((response) => {

@@ -92,6 +92,7 @@ export default {
   justify-content: space-between;
   &__logo {
     margin-right: 10px;
+    cursor: pointer;
    }
   &__user {
     display: flex;
