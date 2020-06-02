@@ -10,7 +10,13 @@
       <AppPopupWindow v-if="isShowTable" @close="isShowTable = false">
         <AdminKitHall v-if="listPlaces.length > 0" :places="createdArray" :checkedPlaces="listPlaces" :reservationPlaces="reservationListPlaces" @clickPlace="addPlaceForReservation">
           <template #bottom>
-            <button class="btn-cabinet" @click="reservationPlaces">Забронировать</button>
+            <p class="titleInfo"><span class="titleInfo">Название: </span>{{informationSessionById.session.film.name}}</p>
+            <p class="titleInfo"><span class="titleInfo">Описание: </span>{{informationSessionById.session.film.description}}</p>
+            <p class="titleInfo"><span class="titleInfo">Жанр: </span>{{informationSessionById.session.film.genre.name}}</p>
+            <p class="titleInfo"><span class="titleInfo">Рейтинг: </span>{{informationSessionById.session.film.rating}}</p>
+            <p class="titleInfo"><span class="titleInfo">Зал: </span>{{informationSessionById.session.hall.name}}</p>
+            <p class="titleInfo"><span class="titleInfo">Длительность: </span>{{(informationSessionById.session.film.length / 3600).toFixed(2)}}<span> часов</span></p>
+            <div class="wrapper-btn"><button class="btn-cabinet" @click="reservationPlaces">Забронировать</button></div>
           </template>
         </AdminKitHall>
       </AppPopupWindow>
@@ -83,7 +89,8 @@ export default {
         sessionId: ''
       },
       selectedSession: {},
-      reservationListPlaces: []
+      reservationListPlaces: [],
+      informationSessionById: {}
     }
   },
   watch: {
@@ -109,6 +116,7 @@ export default {
         this.isShowTable = true
         this.selectedSession = item
         this.$store.dispatch('reservation/getListPlacesById', this.selectedSession.id).then(responseReservation => this.reservationListPlaces = responseReservation)
+        this.$store.dispatch('reservation/getListReservationsById', this.selectedSession.id).then(respData => this.informationSessionById = respData.find(item => item.session.id === this.selectedSession.id))
       })
     },
     toCreatePlaces (width, height) {
@@ -133,7 +141,6 @@ export default {
       this.reservationListPlaces.push(placeItem)
     },
     reservationPlaces () {
-
       const { fName, name, lName } = this.$store.state.auth.currentUser
       this.dataReservation.personName = `${fName} ${name} ${lName}`
       this.dataReservation.sessionId = this.selectedSession.id
